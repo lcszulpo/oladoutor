@@ -1,0 +1,40 @@
+OlaDoutor
+
+Cadastro de Usuário (Médico, paciente)
+
+Autenticação / Autorização
+
+Médico
+Pode cadastrar um médico / Usuário
+Pode cadastrar novos pacientes
+Pode cadastrar medicamentos
+Pode agendar uma consulta
+Pode criar um prontuário
+Pode criar um receituário
+Pode criar um atestado médico
+
+Paciente
+Pode cadastrar um paciente / Usuário
+Pode visualizar calendário com consultas marcadas
+Pode visualizar seus prontuários
+Pode visualizar seus receituários
+Pode visualizar seus atestados
+
+Necessidades:
+Lista com todos os estados do Brasil
+Lista com todos as cidades do Brasil
+Lista com fabricantes de medicamentos 	
+
+Eclipse
+Android Studio
+Java
+JavaEE
+JPA
+RestEasy
+AngularJS
+HTML5
+Bootstrap
+Jboss Forge
+Android
+
+
