@@ -8,14 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import javax.persistence.Enumerated;
-import br.com.bits.escavadora.model.MedicContactType;
-import javax.persistence.EnumType;
-import br.com.bits.escavadora.model.Medic;
+import br.com.bits.escavadora.model.Patient;
 import javax.persistence.ManyToOne;
+import br.com.bits.escavadora.model.City;
 @Entity
-@Table(name = "medic_contact")
-public class MedicContact implements Serializable {
+@Table(name = "patient_address")
+public class PatientAddress implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,14 +23,17 @@ public class MedicContact implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	@Column(name = "description", nullable = false)
-	private String description;
+	@ManyToOne
+	private Patient patient;
 
-	@Enumerated(EnumType.STRING)
-	private MedicContactType medicContactType;
+	@Column(name = "street")
+	private String street;
+
+	@Column(name = "number")
+	private String number;
 
 	@ManyToOne
-	private Medic medic;
+	private City city;
 
 	public Long getId() {
 		return this.id;
@@ -55,10 +56,10 @@ public class MedicContact implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof MedicContact)) {
+		if (!(obj instanceof PatientAddress)) {
 			return false;
 		}
-		MedicContact other = (MedicContact) obj;
+		PatientAddress other = (PatientAddress) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -75,20 +76,28 @@ public class MedicContact implements Serializable {
 		return result;
 	}
 
-	public String getDescription() {
-		return description;
+	public Patient getPatient() {
+		return this.patient;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPatient(final Patient patient) {
+		this.patient = patient;
 	}
 
-	public MedicContactType getMedicContactType() {
-		return medicContactType;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setMedicContactType(MedicContactType medicContactType) {
-		this.medicContactType = medicContactType;
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	@Override
@@ -97,18 +106,20 @@ public class MedicContact implements Serializable {
 		if (id != null)
 			result += "id: " + id;
 		result += ", version: " + version;
-		if (description != null && !description.trim().isEmpty())
-			result += ", description: " + description;
-		if (medicContactType != null)
-			result += ", medicContactType: " + medicContactType;
+		if (patient != null)
+			result += ", patient: " + patient;
+		if (street != null && !street.trim().isEmpty())
+			result += ", street: " + street;
+		if (number != null && !number.trim().isEmpty())
+			result += ", number: " + number;
 		return result;
 	}
 
-	public Medic getMedic() {
-		return this.medic;
+	public City getCity() {
+		return this.city;
 	}
 
-	public void setMedic(final Medic medic) {
-		this.medic = medic;
+	public void setCity(final City city) {
+		this.city = city;
 	}
 }

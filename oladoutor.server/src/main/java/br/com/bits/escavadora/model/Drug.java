@@ -8,14 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
-import javax.persistence.Enumerated;
-import br.com.bits.escavadora.model.MedicContactType;
-import javax.persistence.EnumType;
-import br.com.bits.escavadora.model.Medic;
-import javax.persistence.ManyToOne;
 @Entity
-@Table(name = "medic_contact")
-public class MedicContact implements Serializable {
+@Table(name = "drug")
+public class Drug implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,14 +20,8 @@ public class MedicContact implements Serializable {
 	@Column(name = "version")
 	private int version;
 
-	@Column(name = "description", nullable = false)
-	private String description;
-
-	@Enumerated(EnumType.STRING)
-	private MedicContactType medicContactType;
-
-	@ManyToOne
-	private Medic medic;
+	@Column(name = "name", nullable = false)
+	private String name;
 
 	public Long getId() {
 		return this.id;
@@ -55,10 +44,10 @@ public class MedicContact implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof MedicContact)) {
+		if (!(obj instanceof Drug)) {
 			return false;
 		}
-		MedicContact other = (MedicContact) obj;
+		Drug other = (Drug) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -75,20 +64,12 @@ public class MedicContact implements Serializable {
 		return result;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public MedicContactType getMedicContactType() {
-		return medicContactType;
-	}
-
-	public void setMedicContactType(MedicContactType medicContactType) {
-		this.medicContactType = medicContactType;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -97,18 +78,8 @@ public class MedicContact implements Serializable {
 		if (id != null)
 			result += "id: " + id;
 		result += ", version: " + version;
-		if (description != null && !description.trim().isEmpty())
-			result += ", description: " + description;
-		if (medicContactType != null)
-			result += ", medicContactType: " + medicContactType;
+		if (name != null && !name.trim().isEmpty())
+			result += ", name: " + name;
 		return result;
-	}
-
-	public Medic getMedic() {
-		return this.medic;
-	}
-
-	public void setMedic(final Medic medic) {
-		this.medic = medic;
 	}
 }

@@ -11,18 +11,18 @@ import javax.persistence.Version;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import br.com.bits.escavadora.model.MedicDocument;
+import br.com.bits.escavadora.model.PatientAddress;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
-import br.com.bits.escavadora.model.MedicAddress;
 import javax.persistence.FetchType;
-import br.com.bits.escavadora.model.MedicContact;
+import br.com.bits.escavadora.model.PatientContact;
+import br.com.bits.escavadora.model.PatientDocument;
 import br.com.bits.escavadora.model.Appointment;
 @Entity
-@Table(name = "medic")
-public class Medic implements Serializable {
+@Table(name = "patient")
+public class Patient implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,16 +42,16 @@ public class Medic implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
-	@OneToMany(mappedBy = "medic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<MedicDocument> medicDocument = new HashSet<MedicDocument>();
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<PatientAddress> patientAddresses = new HashSet<PatientAddress>();
 
-	@OneToMany(mappedBy = "medic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<MedicAddress> medicAddresses = new HashSet<MedicAddress>();
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<PatientContact> patientContacts = new HashSet<PatientContact>();
 
-	@OneToMany(mappedBy = "medic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private Set<MedicContact> medicContacts = new HashSet<MedicContact>();
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private Set<PatientDocument> patientDocuments = new HashSet<PatientDocument>();
 
-	@OneToMany(mappedBy = "medic", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
 	private Set<Appointment> appointments = new HashSet<Appointment>();
 
 	public Long getId() {
@@ -75,10 +75,10 @@ public class Medic implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Medic)) {
+		if (!(obj instanceof Patient)) {
 			return false;
 		}
-		Medic other = (Medic) obj;
+		Patient other = (Patient) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -134,28 +134,28 @@ public class Medic implements Serializable {
 		return result;
 	}
 
-	public Set<MedicDocument> getMedicDocument() {
-		return this.medicDocument;
+	public Set<PatientAddress> getPatientAddresses() {
+		return this.patientAddresses;
 	}
 
-	public void setMedicDocument(final Set<MedicDocument> medicDocument) {
-		this.medicDocument = medicDocument;
+	public void setPatientAddresses(final Set<PatientAddress> patientAddresses) {
+		this.patientAddresses = patientAddresses;
 	}
 
-	public Set<MedicAddress> getMedicAddresses() {
-		return this.medicAddresses;
+	public Set<PatientContact> getPatientContacts() {
+		return this.patientContacts;
 	}
 
-	public void setMedicAddresses(final Set<MedicAddress> medicAddresses) {
-		this.medicAddresses = medicAddresses;
+	public void setPatientContacts(final Set<PatientContact> patientContacts) {
+		this.patientContacts = patientContacts;
 	}
 
-	public Set<MedicContact> getMedicContacts() {
-		return this.medicContacts;
+	public Set<PatientDocument> getPatientDocuments() {
+		return this.patientDocuments;
 	}
 
-	public void setMedicContacts(final Set<MedicContact> medicContacts) {
-		this.medicContacts = medicContacts;
+	public void setPatientDocuments(final Set<PatientDocument> patientDocuments) {
+		this.patientDocuments = patientDocuments;
 	}
 
 	public Set<Appointment> getAppointments() {
