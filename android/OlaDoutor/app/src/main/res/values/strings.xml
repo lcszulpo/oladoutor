@@ -1,0 +1,37 @@
+<resources>
+
+    <string name="app_name">OlaDoutor</string>
+    <string name="title_activity_patient_form">PatientFormActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- LOGIN -->
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Entrar</string>
+
+    <string name="error_invalid_email">O endereço de e-mail não é válido.</string>
+    <string name="error_invalid_password">A senha é muito curta.</string>
+    <string name="error_incorrect_password">A senha está incorreta.</string>
+    <string name="error_field_required">Este campo é obrigatório.</string>
+
+    <!-- PATIENT DETAIL -->
+
+    <string name="action_return"></string>
+    <string name="action_edit"></string>
+    <string name="action_delete"></string>
+
+    <string name="title_patient_detail">Paciente</string>
+
+    <!-- PATIENT FORM -->
+
+    <string name="action_save"></string>
+
+    <!-- PATIENT LIST -->
+
+    <string name="action_new"></string>
+
+    <string name="title_patient_list">Pacientes</string>
+
+</resources>

@@ -1,0 +1,29 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Cores principais do tema -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Cor do BG das activitys -->
+        <item name="android:windowBackground">@android:color/white</item>
+
+        <!-- Cor de texto primario: labels, titulos de botoes, etc -->
+        <!-- <item name="android:textColorPrimary">@color/red</item> -->
+
+        <!-- Cor texto secundario, seta de voltar e menu -->
+        <!-- <item name="android:textColorSecondary">@android:color/white</item> -->
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+
+</resources>
