@@ -33,4 +33,9 @@ public class Login {
         this.password = password;
     }
 
+    public enum Status {
+        ACTIVE, INACTIVE
+    }
+
 }
+
