@@ -7,13 +7,11 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lcszulpo.oladoutor.R;
-import com.lcszulpo.oladoutor.model.Clinic;
 import com.lcszulpo.oladoutor.model.Locale;
 import com.lcszulpo.oladoutor.model.Patient;
 
@@ -93,11 +91,6 @@ public class PatientListFragment extends ListFragment {
         locale.setDescription("S1");
 
         locales.add(locale);
-
-        Clinic clinic = new Clinic();
-        clinic.setId(1);
-        clinic.setDescription("Clinica");
-        clinic.setLocales(locales);
 
         for (int i = 0; i < 10; i++) {
             Patient patient = new Patient();

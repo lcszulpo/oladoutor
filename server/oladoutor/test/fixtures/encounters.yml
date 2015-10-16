@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-10-15
+  pulse_rate: 9.99
+  respiratory_rate: 9.99
+  temperature: 9.99
+  weight: 9.99
+  vomit: 1
+  diarrhea: 1
+  pain: MyString
+  pain_detail: MyString
+  has_bleeding: false
+  bleeding_detail: MyString
+  has_weakness: false
+  weakness_detail: MyString
+  other_symptoms: MyString
+  consciousness: MyString
+  mobility: MyString
+  diet: MyString
+  hydration: MyString
+  condition: MyString
+  patient_id: 1
+
+two:
+  date: 2015-10-15
+  pulse_rate: 9.99
+  respiratory_rate: 9.99
+  temperature: 9.99
+  weight: 9.99
+  vomit: 1
+  diarrhea: 1
+  pain: MyString
+  pain_detail: MyString
+  has_bleeding: false
+  bleeding_detail: MyString
+  has_weakness: false
+  weakness_detail: MyString
+  other_symptoms: MyString
+  consciousness: MyString
+  mobility: MyString
+  diet: MyString
+  hydration: MyString
+  condition: MyString
+  patient_id: 1
