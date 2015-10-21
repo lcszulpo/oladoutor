@@ -9,6 +9,7 @@
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_address">Endereço</string>
     <string name="action_sign_in">Entrar</string>
 
     <string name="error_invalid_email">O endereço de e-mail não é válido.</string>
@@ -28,10 +29,20 @@
 
     <string name="action_save"></string>
 
+    <!-- LOCALE FORM -->
+    <string name="title_locale_form">Localidade</string>
+
     <!-- PATIENT LIST -->
 
     <string name="action_new"></string>
+    <string name="action_locale">Localidade</string>
 
     <string name="title_patient_list">Pacientes</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_locale">LocaleActivity</string>
+    <string name="title_activity_locale_list">LocaleListActivity</string>
 
 </resources>

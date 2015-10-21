@@ -24,15 +24,11 @@ public class Encounter {
     private Boolean hasWeakness;
     private WeaknessDetail weaknessDetail;
     private String othersSymptoms;
-    //Consciousness
+    //State
     private Consciousness consciousness;
-    //Mobility
     private Mobility mobility;
-    //Diet
     private Diet diet;
-    //Hydration
     private Hydration hydration;
-    //Condition
     private Condition condition;
 
     public Integer getId() {

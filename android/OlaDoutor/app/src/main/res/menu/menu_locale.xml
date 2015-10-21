@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.lcszulpo.oladoutor.controller.LocaleFormActivity">
+
+    <item
+        android:id="@+id/action_return"
+        android:orderInCategory="200"
+        android:title="@string/action_return"
+        android:icon="@drawable/ic_return"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="200"
+        android:title="@string/action_save"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="ifRoom"></item>
+
+</menu>

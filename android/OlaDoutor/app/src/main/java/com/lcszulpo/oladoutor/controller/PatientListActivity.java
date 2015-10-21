@@ -95,9 +95,18 @@ public class PatientListActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Intent i = new Intent(this, PatientFormActivity.class);
-        startActivity(i);
+        switch (item.getItemId()) {
+            case R.id.action_locale:
+                Intent intentLocale = new Intent(this, LocaleFormActivity.class);
+                startActivity(intentLocale);
+                break;
+            case R.id.action_new:
+                Intent intentPatient = new Intent(this, PatientFormActivity.class);
+                startActivity(intentPatient);
+                break;
+            default:
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
