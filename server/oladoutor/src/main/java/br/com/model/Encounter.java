@@ -15,6 +15,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
+import br.com.model.Patient;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "encounter")
@@ -97,6 +100,9 @@ public class Encounter implements Serializable {
 	@Column(name = "condition", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Condition condition;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Patient patient;
 
 	public Long getId() {
 		return this.id;
@@ -350,6 +356,14 @@ public class Encounter implements Serializable {
 
 	public enum Condition {
 		WELL, UNWELL, CRITICAL, PALLIATIVE, CONVALESCING, SUSPECTED_DEATH, CONFIRMED_DEATH
+	}
+
+	public Patient getPatient() {
+		return this.patient;
+	}
+
+	public void setPatient(final Patient patient) {
+		this.patient = patient;
 	}
 
 }

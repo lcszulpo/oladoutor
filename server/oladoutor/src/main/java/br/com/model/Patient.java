@@ -1,6 +1,8 @@
 package br.com.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,9 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
+
 @Entity
 @Table(name = "patient")
 @XmlRootElement
@@ -48,6 +52,13 @@ public class Patient implements Serializable {
 
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	private Locale locale;
+
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	private Set<Encounter> encounters = new HashSet<Encounter>();
+
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	public Long getId() {
 		return this.id;
@@ -114,14 +125,6 @@ public class Patient implements Serializable {
 		this.age = age;
 	}
 
-	public enum AgeType {
-		YEARS, MONTHS
-	}
-
-	public enum Sex {
-		M, F
-	}
-
 	public AgeType getAgeType() {
 		return ageType;
 	}
@@ -136,6 +139,42 @@ public class Patient implements Serializable {
 
 	public void setSex(Sex sex) {
 		this.sex = sex;
+	}
+
+	public Locale getLocale() {
+		return this.locale;
+	}
+
+	public void setLocale(final Locale locale) {
+		this.locale = locale;
+	}
+
+	public Set<Encounter> getEncounters() {
+		return this.encounters;
+	}
+
+	public void setEncounters(final Set<Encounter> encounters) {
+		this.encounters = encounters;
+	}
+
+	public enum AgeType {
+		YEARS, MONTHS
+	}
+
+	public enum Sex {
+		M, F
+	}
+
+	public enum Status {
+		ACTIVE, INACTIVE
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
@@ -154,15 +193,13 @@ public class Patient implements Serializable {
 			result += ", ageType: " + ageType;
 		if (sex != null)
 			result += ", sex: " + sex;
+		if (locale != null)
+			result += ", locale: " + locale;
+		if (encounters != null)
+			result += ", encounters: " + encounters;
+		if (status != null)
+			result += ", status: " + status;
 		return result;
-	}
-
-	public Locale getLocale() {
-		return this.locale;
-	}
-
-	public void setLocale(final Locale locale) {
-		this.locale = locale;
 	}
 
 }
