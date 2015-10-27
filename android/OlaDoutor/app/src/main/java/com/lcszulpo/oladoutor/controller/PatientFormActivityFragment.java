@@ -13,12 +13,12 @@ import com.lcszulpo.oladoutor.R;
  */
 public class PatientFormActivityFragment extends Fragment {
 
-    public PatientFormActivityFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_patient_form, container, false);
     }
+
+
+
 }

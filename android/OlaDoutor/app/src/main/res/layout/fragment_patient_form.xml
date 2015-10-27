@@ -12,24 +12,24 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Nome"
-        android:id="@+id/textView2" />
+        android:id="@+id/textViewNome" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText" />
+        android:id="@+id/editTextNome" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Sobrenome"
-        android:id="@+id/textView3" />
+        android:id="@+id/textViewSobrenome" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2" />
+        android:id="@+id/editTextSobrenome" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Idade"
-            android:id="@+id/textView4"
+            android:id="@+id/textViewIdade"
             android:layout_weight="1" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Sexo"
-            android:id="@+id/textView6"
+            android:id="@+id/textViewSexo"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -70,14 +70,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText3"
+                android:id="@+id/editTextIdade"
                 android:layout_weight="1" />
 
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New ToggleButton"
-                android:id="@+id/toggleButton"
+                android:id="@+id/toggleButtonTipoIdade"
                 android:textOn="ANOS"
                 android:textOff="MÊSES" />
 
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/switch1"
+            android:id="@+id/switchSexo"
             android:checked="false"
             android:textOn="Masculino"
             android:textOff="Feminino"
@@ -101,11 +101,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Localização"
-        android:id="@+id/textView5" />
+        android:id="@+id/textViewLocalizacao" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner" />
+        android:id="@+id/spinnerLocalizacao" />
 
 </LinearLayout>

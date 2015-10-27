@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="url">http://192.168.103.166:8080/rest/</string>
+
+    <string name="recurso_connection"></string>
+
+</resources>

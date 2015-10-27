@@ -30,12 +30,12 @@
     <string name="action_save"></string>
 
     <!-- LOCALE FORM -->
-    <string name="title_locale_form">Localidade</string>
+    <string name="title_locale_form">Localização</string>
 
     <!-- PATIENT LIST -->
 
     <string name="action_new"></string>
-    <string name="action_locale">Localidade</string>
+    <string name="action_locale">Localizações</string>
 
     <string name="title_patient_list">Pacientes</string>
 
@@ -44,5 +44,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_locale">LocaleActivity</string>
     <string name="title_activity_locale_list">LocaleListActivity</string>
+    <string name="title_activity_encounter_form">EncounterFormActivity</string>
 
 </resources>
