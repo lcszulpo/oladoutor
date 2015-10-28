@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url">http://192.168.103.166:8080/rest/</string>
-
-    <string name="recurso_connection"></string>
+    <string name="schema">http://</string>
+    <string name="door">:8080</string>
+    <string name="path">/oladoutor/rest</string>
+    <string name="res_connection">/connection/test</string>
 
 </resources>

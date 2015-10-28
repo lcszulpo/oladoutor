@@ -17,9 +17,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
         android:ems="10"
-        android:id="@+id/editTextEndereco" />
+        android:id="@+id/editTextEndereco"
+        android:inputType="number"
+        android:digits="0123456789." />
 
     <Button
         android:layout_width="match_parent"
