@@ -1,5 +1,16 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-    android:name="com.lcszulpo.oladoutor.controller.PatientFormActivityFragment"
-    tools:layout="@layout/fragment_patient_form" android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="com.lcszulpo.oladoutor.controller.PatientFormActivity"
+    android:orientation="vertical">
+
+    <include android:id="@+id/tool_bar"
+        layout="@layout/tool_bar">
+    </include>
+
+    <fragment android:id="@+id/fragment_patient_form"
+        android:name="com.lcszulpo.oladoutor.controller.PatientFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

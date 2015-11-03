@@ -5,5 +5,10 @@
     <string name="door">:8080</string>
     <string name="path">/oladoutor/rest</string>
     <string name="res_connection">/connection/test</string>
+    <string name="res_patients_list_actives">/patients/list/actives</string>
+    <string name="res_patients_save">/patients/save</string>
+    <string name="res_locales_list">/locales/list</string>
+    <string name="res_locales_save">/locales/save</string>
+    <string name="res_locales_delete">/locales/delete/</string>
 
 </resources>

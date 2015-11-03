@@ -1,18 +1,14 @@
 package br.com.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Id;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
-import java.util.Set;
-import java.util.HashSet;
-import br.com.model.Patient;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
 import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "locale")
@@ -24,7 +20,7 @@ public class Locale implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	private Integer id;
 	@Version
 	@Column(name = "version")
 	private int version;
@@ -32,14 +28,11 @@ public class Locale implements Serializable {
 	@Column(length = 70, name = "description", nullable = false)
 	private String description;
 
-	@OneToMany(mappedBy = "locale", cascade = CascadeType.ALL)
-	private Set<Patient> patients = new HashSet<Patient>();
-
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -95,11 +88,4 @@ public class Locale implements Serializable {
 		return result;
 	}
 
-	public Set<Patient> getPatients() {
-		return this.patients;
-	}
-
-	public void setPatients(final Set<Patient> patients) {
-		this.patients = patients;
-	}
 }

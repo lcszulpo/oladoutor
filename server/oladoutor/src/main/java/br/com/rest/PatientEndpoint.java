@@ -4,20 +4,18 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.UriBuilder;
 
 import br.com.model.Patient;
 
@@ -28,22 +26,56 @@ public class PatientEndpoint {
 	private EntityManager em;
 
 	@POST
-	@Consumes("application/json")
-	@Path("/create")
-	public Response create(Patient entity) {
-		em.persist(entity);
+	@Path("/save")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response save(Patient entity) {
+		if (entity == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
 		
-		return Response.
-				created(UriBuilder.
-						fromResource(PatientEndpoint.class).
-						path(String.valueOf(entity.getId())).
-						build())
-				.build();
+		if (entity.getName() == null || entity.getName().isEmpty()) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getLastName() == null || entity.getLastName().isEmpty()) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getAge() == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getAgeType() == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getSex() == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getLocale() == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (entity.getStatus() == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		entity = em.merge(entity);
+		
+		em.flush();
+		
+		return Response.ok().entity(entity).build();
 	}
 
 	@DELETE
 	@Path("/delete/{id:[0-9][0-9]*}")
 	public Response deleteById(@PathParam("id") Integer id) {
+		if (id == null) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
 		Patient entity = em.find(Patient.class, id);
 		
 		if (entity == null) {
@@ -52,7 +84,7 @@ public class PatientEndpoint {
 		
 		em.remove(entity);
 		
-		return Response.noContent().build();
+		return Response.ok().entity(id).build();
 	}
 
 	@GET
@@ -67,67 +99,6 @@ public class PatientEndpoint {
 		final List<Patient> results = findAllQuery.getResultList();
 
 		return results;
-	}
-
-	@PUT
-	@Path("/update/{id:[0-9][0-9]*}")
-	@Consumes("application/json")
-	public Response update(@PathParam("id") Integer id, Patient entity) {
-		if (entity == null) {
-			return Response.status(Status.BAD_REQUEST).build();
-		}
-		
-		if (id == null) {
-			return Response.status(Status.BAD_REQUEST).build();
-		}
-		
-		if (!id.equals(entity.getId())) {
-			return Response.status(Status.CONFLICT).entity(entity).build();
-		}
-		
-		if (em.find(Patient.class, id) == null) {
-			return Response.status(Status.NOT_FOUND).build();
-		}
-		
-		try {
-			entity = em.merge(entity);
-		} catch (OptimisticLockException e) {
-			return Response.status(Response.Status.CONFLICT).entity(e.getEntity()).build();
-		}
-
-		return Response.noContent().build();
-	}
-	
-	@PUT
-	@Path("/update/status/{id:[0-9][0-9]*}")
-	@Consumes("application/json")
-	public Response updateStatus(@PathParam("id") Integer id) {
-		if (id == null) {
-			return Response.status(Status.BAD_REQUEST).build();
-		}
-		
-		Patient entity = em.find(Patient.class, id);
-		
-		if (entity == null) {
-			return Response.status(Status.NOT_FOUND).build();
-		}
-		
-		try {
-			
-			if(entity.getStatus().equals(Patient.Status.ACTIVE)) {
-				entity.setStatus(Patient.Status.INACTIVE);
-			} else if(entity.getStatus().equals(Patient.Status.INACTIVE)) {
-				entity.setStatus(Patient.Status.ACTIVE);
-			} else {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
-			
-			entity = em.merge(entity);
-		} catch (OptimisticLockException e) {
-			return Response.status(Response.Status.CONFLICT).entity(e.getEntity()).build();
-		}
-
-		return Response.noContent().build();
 	}
 
 }

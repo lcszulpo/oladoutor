@@ -1,8 +1,6 @@
 package br.com.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +25,8 @@ public class Patient implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	private Integer id;
+	
 	@Version
 	@Column(name = "version")
 	private int version;
@@ -50,21 +48,18 @@ public class Patient implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Sex sex;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	private Locale locale;
-
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-	private Set<Encounter> encounters = new HashSet<Encounter>();
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -149,14 +144,6 @@ public class Patient implements Serializable {
 		this.locale = locale;
 	}
 
-	public Set<Encounter> getEncounters() {
-		return this.encounters;
-	}
-
-	public void setEncounters(final Set<Encounter> encounters) {
-		this.encounters = encounters;
-	}
-
 	public enum AgeType {
 		YEARS, MONTHS
 	}
@@ -195,8 +182,6 @@ public class Patient implements Serializable {
 			result += ", sex: " + sex;
 		if (locale != null)
 			result += ", locale: " + locale;
-		if (encounters != null)
-			result += ", encounters: " + encounters;
 		if (status != null)
 			result += ", status: " + status;
 		return result;

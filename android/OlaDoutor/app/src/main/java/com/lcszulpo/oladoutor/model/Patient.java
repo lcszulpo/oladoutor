@@ -2,10 +2,12 @@ package com.lcszulpo.oladoutor.model;
 
 import com.lcszulpo.oladoutor.model.Locale;
 
+import java.io.Serializable;
+
 /**
  * Created by lcszulpo on 12/09/15.
  */
-public class Patient {
+public class Patient implements Serializable {
 
     private Integer id;
     private String name;
@@ -14,6 +16,8 @@ public class Patient {
     private AgeType ageType;
     private Sex sex;
     private Locale locale;
+    private Integer version;
+    private Status status;
 
     public Integer getId() {
         return id;
@@ -71,12 +75,32 @@ public class Patient {
         this.locale = locale;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public enum AgeType {
         YEARS, MONTHS
     }
 
     public enum Sex {
         M,F
+    }
+
+    public enum Status {
+        ACTIVE, INACTIVE
     }
 
 }

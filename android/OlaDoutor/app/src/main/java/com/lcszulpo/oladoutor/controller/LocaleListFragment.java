@@ -1,6 +1,5 @@
 package com.lcszulpo.oladoutor.controller;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
-import com.lcszulpo.oladoutor.model.Patient;
+import com.lcszulpo.oladoutor.model.Locale;
 
 import org.json.JSONArray;
 
@@ -30,51 +29,28 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class PatientListFragment extends ListFragment {
+public class LocaleListFragment extends ListFragment {
 
-    private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    public static final String FIELD_LOCALE = "LOCALE";
 
-    private Callbacks mCallbacks = sDummyCallbacks;
-
-    private int mActivatedPosition = ListView.INVALID_POSITION;
-
-    private List<Patient> patients;
-
-    public interface Callbacks {
-        public void onItemSelected(Patient patient);
-    }
-
-    private static Callbacks sDummyCallbacks = new Callbacks() {
-        @Override
-        public void onItemSelected(Patient patient) {
-        }
-    };
+    private List<Locale> locales;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         setHasOptionsMenu(true);
-
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        initPatientListRequest();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_return:
+                getActivity().onBackPressed();
+                break;
             case R.id.action_new:
-                Intent intentPatient = new Intent(getActivity(), PatientFormActivity.class);
-                startActivity(intentPatient);
+                Intent intentLocale = new Intent(getActivity(), LocaleFormActivity.class);
+                startActivity(intentLocale);
                 break;
             default:
                 break;
@@ -84,45 +60,28 @@ public class PatientListFragment extends ListFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onResume() {
+        super.onResume();
 
-        if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException("Activity must implement fragment's callbacks.");
-        }
-
-        mCallbacks = (Callbacks) activity;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-        mCallbacks = sDummyCallbacks;
+        initLocaleListRequest();
     }
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
-        mCallbacks.onItemSelected(patients.get(position));
+        Intent intent = new Intent(getActivity(), LocaleFormActivity.class);
+        intent.putExtra(FIELD_LOCALE, locales.get(position));
+        startActivity(intent);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-        }
-    }
-
-    private void initPatientListRequest() {
+    private void initLocaleListRequest() {
         final String url =
                 getString(R.string.schema) +
                         AppController.getInstance().getDominio() +
                         getString(R.string.door) +
                         getString(R.string.path) +
-                        getString(R.string.res_patients_list_actives);
+                        getString(R.string.res_locales_list);
 
         JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -130,8 +89,8 @@ public class PatientListFragment extends ListFragment {
                     public void onResponse(JSONArray response) {
                         ObjectMapper mapper = new ObjectMapper();
                         try {
-                            patients = Arrays.asList(mapper.readValue(response.toString(), Patient[].class));
-                            setListAdapter(new PatientListAdapter(getActivity(), patients));
+                            locales = Arrays.asList(mapper.readValue(response.toString(), Locale[].class));
+                            setListAdapter(new LocaleListAdapter(getActivity(), locales));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -155,40 +114,24 @@ public class PatientListFragment extends ListFragment {
         AppController.getInstance().addToRequestQueue(objectRequest);
     }
 
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
-        getListView().setChoiceMode(activateOnItemClick
-                ? ListView.CHOICE_MODE_SINGLE
-                : ListView.CHOICE_MODE_NONE);
-    }
-
-    private void setActivatedPosition(int position) {
-        if (position == ListView.INVALID_POSITION) {
-            getListView().setItemChecked(mActivatedPosition, false);
-        } else {
-            getListView().setItemChecked(position, true);
-        }
-
-        mActivatedPosition = position;
-    }
-
-    private class PatientListAdapter extends BaseAdapter {
+    private class LocaleListAdapter extends BaseAdapter {
 
         private Context context;
-        private List<Patient> patients;
+        private List<Locale> locales;
 
-        public PatientListAdapter(Context context, List<Patient> patients) {
+        public LocaleListAdapter(Context context, List<Locale> locales) {
             this.context = context;
-            this.patients = patients;
+            this.locales = locales;
         }
 
         @Override
         public int getCount() {
-            return patients.size();
+            return locales.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return patients.get(position);
+            return locales.get(position);
         }
 
         @Override
@@ -198,15 +141,15 @@ public class PatientListFragment extends ListFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Patient patient = patients.get(position);
+            Locale locale = locales.get(position);
 
             LayoutInflater inflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            View view = inflater.inflate(R.layout.list_view_patient_row_item, null);
+            View view = inflater.inflate(R.layout.list_view_locale_row_item, null);
 
-            TextView txtvName = (TextView)view.findViewById(R.id.txtvName);
-            txtvName.setText(patient.getName() + " " + patient.getLastName());
+            TextView txtvName = (TextView)view.findViewById(R.id.txtvDescription);
+            txtvName.setText(locale.getDescription());
 
             return view;
         }

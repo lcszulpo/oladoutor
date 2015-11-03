@@ -3,12 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.lcszulpo.oladoutor.controller.EncounterFormActivity">
+    tools:context="com.lcszulpo.oladoutor.controller.EncounterFormActivity"
+    android:orientation="vertical">
+
+    <include android:id="@+id/tool_bar"
+        layout="@layout/tool_bar">
+    </include>
 
     <fragment
-        android:id="@+id/fragment"
-        android:name="com.lcszulpo.oladoutor.controller.EncounterFormActivityFragment"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        tools:layout="@layout/fragment_encounter_form" />
+        android:name="com.lcszulpo.oladoutor.controller.EncounterFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_encounter_form"
+        android:id="@+id/fragment" />
 
 </LinearLayout>

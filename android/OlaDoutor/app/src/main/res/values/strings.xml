@@ -27,10 +27,18 @@
 
     <!-- PATIENT FORM -->
 
+    <string name="title_patient_form">Paciente</string>
     <string name="action_save"></string>
+    <string name="action_clear"></string>
 
     <!-- LOCALE FORM -->
     <string name="title_locale_form">Localização</string>
+
+    <!-- LOCALE LIST -->
+    <string name="title_locale_list">Localizações</string>
+
+    <!-- ENCOUNTER FORM -->
+    <string name="title_encounter_form">Encontro</string>
 
     <!-- PATIENT LIST -->
 
@@ -43,7 +51,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_locale">LocaleActivity</string>
-    <string name="title_activity_locale_list">LocaleListActivity</string>
+
     <string name="title_activity_encounter_form">EncounterFormActivity</string>
 
 </resources>

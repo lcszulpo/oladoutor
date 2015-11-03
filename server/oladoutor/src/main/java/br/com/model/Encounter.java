@@ -29,7 +29,7 @@ public class Encounter implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	private Integer id;
 	@Version
 	@Column(name = "version")
 	private int version;
@@ -104,11 +104,11 @@ public class Encounter implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 
-	public Long getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(final Long id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 

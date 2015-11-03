@@ -1,9 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.lcszulpo.oladoutor.controller.PatientFormActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_return"
@@ -16,7 +12,14 @@
         android:id="@+id/action_save"
         android:orderInCategory="200"
         android:title="@string/action_save"
-        android:icon="@drawable/ic_edit"
+        android:icon="@drawable/ic_save"
+        app:showAsAction="ifRoom"></item>
+
+    <item
+        android:id="@+id/action_clear"
+        android:orderInCategory="200"
+        android:title="@string/action_clear"
+        android:icon="@drawable/ic_clear"
         app:showAsAction="ifRoom"></item>
 
 </menu>

@@ -1,24 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-    android:name="com.lcszulpo.oladoutor.controller.LocaleActivityFragment"
-    tools:layout="@layout/fragment_locale_form" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="com.lcszulpo.oladoutor.controller.LocaleFormActivity"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ToolBarStyle" >
-    </android.support.v7.widget.Toolbar>
+    <include android:id="@+id/tool_bar"
+        layout="@layout/tool_bar">
+    </include>
 
-    <fragment
+    <fragment android:id="@+id/fragment_locale_form"
+        android:name="com.lcszulpo.oladoutor.controller.LocaleFormFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.lcszulpo.oladoutor.controller.LocaleFormActivityFragment"
-        android:id="@+id/locale_fragment" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

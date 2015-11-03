@@ -56,7 +56,7 @@ public class MainActivityFragment extends Fragment {
         buttonConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initRequest();
+                initConnectionRequest();
             }
         });
     }
@@ -74,7 +74,7 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    private void initRequest() {
+    private void initConnectionRequest() {
         final String url =
                 getString(R.string.schema) +
                 editTextEndereco.getText().toString() +
@@ -86,8 +86,10 @@ public class MainActivityFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        //Insere no arquivo para a próxima vez que eu abrir o aplicativo
                         writeUrlFile(editTextEndereco.getText().toString());
-
+                        //Insere no singleton para utilizar posteriormente
+                        AppController.getInstance().setDominio(editTextEndereco.getText().toString());
                         Intent i = new Intent(getActivity(), PatientListActivity.class);
                         startActivity(i);
                         getActivity().finish();

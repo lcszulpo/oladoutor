@@ -9,24 +9,24 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_edit"
+        android:id="@+id/action_save"
         android:orderInCategory="200"
-        android:title="@string/action_edit"
-        android:icon="@drawable/ic_edit"
+        android:title="@string/action_save"
+        android:icon="@drawable/ic_save"
         app:showAsAction="ifRoom"></item>
-
-    <item
-        android:id="@+id/action_new"
-        android:orderInCategory="200"
-        android:title="Novo encontro"
-        android:icon="@drawable/ic_new"
-        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_delete"
         android:orderInCategory="200"
         android:title="Remover"
         android:icon="@drawable/ic_delete"
+        app:showAsAction="ifRoom"></item>
+
+    <item
+        android:id="@+id/action_clear"
+        android:orderInCategory="200"
+        android:title="Limpar"
+        android:icon="@drawable/ic_clear"
         app:showAsAction="ifRoom"></item>
 
 </menu>
