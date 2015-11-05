@@ -1,5 +1,7 @@
 package com.lcszulpo.oladoutor.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Date;
 
 /**
@@ -10,8 +12,8 @@ public class Encounter {
     private Integer id;
     private Date date;
     //Vital signals
-    private Double pulseRate; //BPM
-    private Double respiratoryRate; //BPM
+    private Integer pulseRate; //BPM
+    private Integer respiratoryRate; //BPM
     private Double temperature; //ºC
     private Double weight; //Kg
     //Symptoms
@@ -47,19 +49,19 @@ public class Encounter {
         this.date = date;
     }
 
-    public Double getPulseRate() {
+    public Integer getPulseRate() {
         return pulseRate;
     }
 
-    public void setPulseRate(Double pulseRate) {
+    public void setPulseRate(Integer pulseRate) {
         this.pulseRate = pulseRate;
     }
 
-    public Double getRespiratoryRate() {
+    public Integer getRespiratoryRate() {
         return respiratoryRate;
     }
 
-    public void setRespiratoryRate(Double respiratoryRate) {
+    public void setRespiratoryRate(Integer respiratoryRate) {
         this.respiratoryRate = respiratoryRate;
     }
 
@@ -192,40 +194,218 @@ public class Encounter {
     }
 
     public enum Pain {
-        NONE, MILD, MODERATE, SEVERE
+        NONE("Nenhuma"),
+        MILD("Suave"),
+        MODERATE("Moderada"),
+        SEVERE("Severa");
+
+        private String description;
+
+        private Pain(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum PainDetail {
-        HEADACHE, SORE_THROAT, HEARTBURN, CHEST, BACK, MUSCLE_JOINT, ABDOMINAL_UPPER, ABDOMINAL_LOWER
+        NONE("Nenhuma"),
+        HEADACHE("Dor de cabeça"),
+        SORE_THROAT("Dor de garganta"),
+        HEARTBURN("Azia"),
+        CHEST("Dor no peito"),
+        BACK("Dor nas costas"),
+        MUSCLE_JOINT("Dor nas articulações"),
+        ABDOMINAL_UPPER("Dor abdominal superior"),
+        ABDOMINAL_LOWER("Dor abdominal inferior");
+
+        private String description;
+
+        private PainDetail(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum BleedingDetail {
-        ORAL_BLEEDING, NOSEBLEED, VOMITING_BLOOD, VAGINAL_BLEEDING, COUGHING_UP_BLOOD,
-        BLOOD_IN_URINE, BLEEDING_FROM_EYES, BLACK_BLOOD_IN_STOOL, RED_BLOOD_IN_STOOL
+        NONE("Nenhuma"),
+        ORAL_BLEEDING("Hemorragia oral"),
+        NOSEBLEED("Hemorragia nasal"),
+        VOMITING_BLOOD("Vomitando sangue"),
+        COUGHING_UP_BLOOD("Tossindo sangue"),
+        BLOOD_IN_URINE("Sangue na urína"),
+        BLEEDING_FROM_EYES("Sangramento pelos olhos");
+
+        private String description;
+
+        private BleedingDetail(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum WeaknessDetail {
-        NONE, MILD, MODERATE, SEVERE
+        NONE("Nenhuma"),
+        MILD("Suave"),
+        MODERATE("Moderada"),
+        SEVERE("Severa");
+
+        private String description;
+
+        private WeaknessDetail(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum Consciousness {
-        ALERT, RESPONDS_VOICE, RESPONDS_PAIN, DO_NOT_ANSWER
+        ALERT("Alerta"),
+        RESPONDS_VOICE("Responde vozes"),
+        RESPONDS_PAIN("Responde dores"),
+        DO_NOT_ANSWER("Não está respondendo");
+
+        private String description;
+
+        private Consciousness(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum Mobility {
-        WALKS, WALKING_WITH_DIFFICULTY, ASSISTED, BED_BOUND
+        WALKS("Caminhando"),
+        WALKING_WITH_DIFFICULTY("Caminhando com dificuldade"),
+        ASSISTED("Caminhando com ajuda"),
+        BED_BOUND("Permanece na cama");
+
+        private String description;
+
+        private Mobility(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum Diet {
-        EATING, ONLY_FLUIDS
+        EATING("Comendo"),
+        ONLY_FLUIDS("Apenas fluídos");
+
+        private String description;
+
+        private Diet(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum Hydration {
-        ADEQUATE_FLUID_INTAKE, NEED_ORS, NEED_IV_FLUIDS
+        ADEQUATE_FLUID_INTAKE("Adequada"),
+        NEED_ORS("Precisa de hidratação oral"),
+        NEED_IV_FLUIDS("Precisa de fluídos via intravenosa");
+
+        private String description;
+
+        private Hydration(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
     public enum Condition {
-        WELL, UNWELL, CRITICAL, PALLIATIVE, CONVALESCING, SUSPECTED_DEATH, CONFIRMED_DEATH
+        WELL("Ok"),
+        UNWELL("indisposto"),
+        CRITICAL("Crítico"),
+        PALLIATIVE("Melhora momentânea"),
+        CONVALESCING("Se curando"),
+        SUSPECTED_DEATH("Suspeita de morte"),
+        CONFIRMED_DEATH("Morte confirmada");
+
+        private String description;
+
+        private Condition(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
+
+        @JsonValue
+        public String toValue() {
+            return this.name();
+        }
     }
 
 }

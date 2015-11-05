@@ -39,10 +39,10 @@ public class Encounter implements Serializable {
 	private Date date;
 
 	@Column(name = "pulse_rate", nullable = false)
-	private Double pulseRate;
+	private Integer pulseRate;
 
 	@Column(name = "respiratory_rate", nullable = false)
-	private Double respiratoryRate;
+	private Integer respiratoryRate;
 
 	@Column(name = "temperature", nullable = false)
 	private Double temperature;
@@ -60,25 +60,25 @@ public class Encounter implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Pain pain;
 
-	@Column(name = "pain_detail", nullable = false)
+	@Column(name = "pain_detail")
 	@Enumerated(EnumType.STRING)
 	private PainDetail painDetail;
 
 	@Column(name = "has_bleeding", nullable = false)
 	private Boolean hasBleeding;
 
-	@Column(name = "bleeding_detail", nullable = false)
+	@Column(name = "bleeding_detail")
 	@Enumerated(EnumType.STRING)
 	private BleedingDetail bleedingDetail;
 
 	@Column(name = "has_weakness", nullable = false)
 	private Boolean hasWeakness;
 
-	@Column(name = "weakness_detail", nullable = false)
+	@Column(name = "weakness_detail")
 	@Enumerated(EnumType.STRING)
 	private WeaknessDetail weaknessDetail;
 
-	@Column(length = 70, name = "others_symptoms", nullable = false)
+	@Column(length = 255, name = "others_symptoms")
 	private String othersSymptoms;
 
 	@Column(name = "consciousness", nullable = false)
@@ -153,19 +153,19 @@ public class Encounter implements Serializable {
 		this.date = date;
 	}
 
-	public Double getPulseRate() {
+	public Integer getPulseRate() {
 		return pulseRate;
 	}
 
-	public void setPulseRate(Double pulseRate) {
+	public void setPulseRate(Integer pulseRate) {
 		this.pulseRate = pulseRate;
 	}
 
-	public Double getRespiratoryRate() {
+	public Integer getRespiratoryRate() {
 		return respiratoryRate;
 	}
 
-	public void setRespiratoryRate(Double respiratoryRate) {
+	public void setRespiratoryRate(Integer respiratoryRate) {
 		this.respiratoryRate = respiratoryRate;
 	}
 
