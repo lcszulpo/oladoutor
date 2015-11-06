@@ -24,7 +24,6 @@ public class PatientFormActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_patient_form, menu);
         return true;
     }
@@ -34,7 +33,7 @@ public class PatientFormActivity extends AppCompatActivity {
         super.onResume();
 
         Patient patient =
-                (Patient) getIntent().getSerializableExtra(PatientDetailFragment.FIELD_PATIENT);
+                (Patient) getIntent().getSerializableExtra(PatientDetailActivity.FIELD_PATIENT);
         if(patient != null) {
             PatientFormFragment patientFormFragment =
                     (PatientFormFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_patient_form);

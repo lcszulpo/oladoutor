@@ -14,40 +14,20 @@ public class PatientListActivity extends AppCompatActivity
         implements PatientListFragment.Callbacks {
 
     private Toolbar toolbar;
-    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_list);
 
-        if (findViewById(R.id.patient_detail_container) != null) {
-            mTwoPane = true;
-
-            ((PatientListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.patient_list))
-                    .setActivateOnItemClick(true);
-        }
-
         initToolBar();
     }
 
     @Override
     public void onItemSelected(Patient patient) {
-        if (mTwoPane) {
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(PatientDetailFragment.FIELD_PATIENT, patient);
-            PatientDetailFragment fragment = new PatientDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.patient_detail_container, fragment)
-                    .commit();
-
-        } else {
-            Intent detailIntent = new Intent(this, PatientDetailActivity.class);
-            detailIntent.putExtra(PatientDetailFragment.FIELD_PATIENT, patient);
-            startActivity(detailIntent);
-        }
+        Intent detailIntent = new Intent(this, PatientDetailActivity.class);
+        detailIntent.putExtra(PatientDetailActivity.FIELD_PATIENT, patient);
+        startActivity(detailIntent);
     }
 
     @Override

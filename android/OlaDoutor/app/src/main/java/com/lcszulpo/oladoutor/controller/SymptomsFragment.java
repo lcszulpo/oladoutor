@@ -5,55 +5,70 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lcszulpo.oladoutor.R;
+import com.lcszulpo.oladoutor.model.Encounter;
+
+import java.text.SimpleDateFormat;
 
 public class SymptomsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String FIELD_ENCOUNTER = "ENCOUNTER";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SymptomsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SymptomsFragment newInstance(String param1, String param2) {
+    private Encounter encounter;
+
+    private TextView textViewSymptomsDate;
+    private TextView textViewVomit;
+    private TextView textViewDiarrhea;
+    private TextView textViewPain;
+    private TextView textViewBleed;
+    private TextView textViewWeakness;
+
+    public static SymptomsFragment newInstance(Encounter encounter) {
         SymptomsFragment fragment = new SymptomsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(FIELD_ENCOUNTER, encounter);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SymptomsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            encounter = (Encounter) getArguments().getSerializable(FIELD_ENCOUNTER);
         }
+
+        findViewsById();
+        initFields();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_symptoms, container, false);
+    }
+
+    private void findViewsById() {
+        textViewSymptomsDate = (TextView) getActivity().findViewById(R.id.textViewSymptomsDate);
+        textViewVomit = (TextView) getActivity().findViewById(R.id.textViewVomit);
+        textViewDiarrhea = (TextView) getActivity().findViewById(R.id.textViewDiarrhea);
+        textViewPain = (TextView) getActivity().findViewById(R.id.textViewPain);
+        textViewBleed = (TextView) getActivity().findViewById(R.id.textViewBleed);
+        textViewWeakness = (TextView) getActivity().findViewById(R.id.textViewWeakness);
+    }
+
+    private void initFields() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
+        textViewSymptomsDate.setText(format.format(encounter.getDate()));
+        textViewVomit.setText(String.valueOf(encounter.getVomit()) + " x em 24H");
+        textViewDiarrhea.setText(String.valueOf(encounter.getDiarrhea()) + " x em 24H");
+        textViewPain.setText(encounter.getPain().toString());
+        textViewBleed.setText(encounter.getBleedingDetail().toString());
+        textViewWeakness.setText(encounter.getWeaknessDetail().toString());
     }
 
 }

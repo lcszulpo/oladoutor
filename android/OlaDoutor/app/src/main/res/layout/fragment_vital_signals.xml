@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="00/00/0000 00:00"
-                android:id="@+id/textView16"
+                android:id="@+id/textViewVitalSignalsDate"
                 android:textSize="25dp" />
         </LinearLayout>
 
@@ -74,8 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="35"
-                android:id="@+id/textView9"
+                android:id="@+id/textViewPulseRate"
                 android:textSize="30dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -118,8 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="00 BPM"
-                android:id="@+id/textView11"
+                android:id="@+id/textViewRespiratoryRate"
                 android:textSize="35dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -161,8 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="00 ºC"
-                android:id="@+id/textView13"
+                android:id="@+id/textViewTemperature"
                 android:textSize="35dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -204,8 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="00 KG"
-                android:id="@+id/textView15"
+                android:id="@+id/textViewWeight"
                 android:textSize="35dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>

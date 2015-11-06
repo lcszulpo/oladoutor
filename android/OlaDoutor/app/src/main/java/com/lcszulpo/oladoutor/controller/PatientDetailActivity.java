@@ -1,5 +1,7 @@
 package com.lcszulpo.oladoutor.controller;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,50 +13,51 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
+import com.lcszulpo.oladoutor.model.Encounter;
+import com.lcszulpo.oladoutor.model.Patient;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class PatientDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-
     private ViewPager mPager;
-
     private PagerAdapter mPagerAdapter;
+    private Patient patient;
+    private Encounter encounter;
+    private FrameLayout frameLayout;
+
+    public static final String FIELD_PATIENT = "PATIENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_detail);
 
-        if (savedInstanceState == null) {
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(PatientDetailFragment.FIELD_PATIENT,
-                    getIntent().getSerializableExtra(PatientDetailFragment.FIELD_PATIENT));
-            PatientDetailFragment fragment = new PatientDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.patient_detail_container, fragment)
-                    .commit();
-        }
-
         initToolBar();
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
-    }
+        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            navigateUpTo(new Intent(this, PatientListActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        patient = (Patient) getIntent().getSerializableExtra(FIELD_PATIENT);
     }
 
     @Override
@@ -73,6 +76,67 @@ public class PatientDetailActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initSearchRequest();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_return:
+                onBackPressed();
+                break;
+            case R.id.action_edit:
+                Intent intentPatient = new Intent(this, PatientFormActivity.class);
+                intentPatient.putExtra(FIELD_PATIENT, patient);
+                startActivity(intentPatient);
+                break;
+            case R.id.action_new:
+                Intent intentEncounter = new Intent(this, EncounterFormActivity.class);
+                intentEncounter.putExtra(FIELD_PATIENT, patient);
+                startActivity(intentEncounter);
+                break;
+            case R.id.action_delete:
+                if(patient == null || patient.getId() == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PatientDetailActivity.this);
+                    builder.setTitle("Erro ao deletar o encontro");
+                    builder.setMessage("O paciente não foi informado");
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+
+                if(encounter == null || encounter.getId() == null) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PatientDetailActivity.this);
+                    builder.setTitle("Erro ao deletar o encontro");
+                    builder.setMessage("O paciente não possui encontros");
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+
+                initDeleteRequest();
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -82,19 +146,23 @@ public class PatientDetailActivity extends AppCompatActivity {
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
+
+        private Encounter encounter;
+
+        public ScreenSlidePagerAdapter(FragmentManager fm, Encounter encounter) {
             super(fm);
+            this.encounter = encounter;
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new VitalSignalsFragment();
+                    return VitalSignalsFragment.newInstance(encounter);
                 case 1:
-                    return new SymptomsFragment();
+                    return SymptomsFragment.newInstance(encounter);
                 case 2:
-                    return new StateFragment();
+                    return StateFragment.newInstance(encounter);
                 default:
                     return null;
             }
@@ -104,6 +172,93 @@ public class PatientDetailActivity extends AppCompatActivity {
         public int getCount() {
             return 3;
         }
+    }
+
+    private void initSearchRequest() {
+        final String url =
+                getString(R.string.schema) +
+                        AppController.getInstance().getDominio() +
+                        getString(R.string.door) +
+                        getString(R.string.path) +
+                        getString(R.string.res_encounters_find) +
+                        patient.getId();
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            encounter = mapper.readValue(response.toString(), Encounter.class);
+
+                            mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), encounter);
+                            mPager.setAdapter(mPagerAdapter);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(!Integer.valueOf(404).equals(error.networkResponse.statusCode)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PatientDetailActivity.this);
+                    builder.setTitle("Erro ao consultar o encontro");
+                    builder.setMessage("Nao foi possivel consultar um encontro para o paciente");
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                } else {
+                    mPager.setVisibility(View.GONE);
+                    frameLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(objectRequest);
+    }
+
+    private void initDeleteRequest() {
+        final String url =
+                getString(R.string.schema) +
+                        AppController.getInstance().getDominio() +
+                        getString(R.string.door) +
+                        getString(R.string.path) +
+                        getString(R.string.res_encounters_delete) +
+                        patient.getId();
+
+        StringRequest objectRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        initSearchRequest();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PatientDetailActivity.this);
+                builder.setTitle("Erro ao excluir o encontro");
+
+                if(!Integer.valueOf(404).equals(error.networkResponse.statusCode)) {
+                    builder.setMessage("Nao foi possivel excluir o encontro.");
+                } else {
+                    builder.setMessage("Nao foram encontrado encontros para o paciente selecionado.");
+                }
+
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(objectRequest);
     }
 
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.lcszulpo.oladoutor.R;
+import com.lcszulpo.oladoutor.model.Patient;
 
 public class EncounterFormActivity extends AppCompatActivity {
 
@@ -25,6 +26,19 @@ public class EncounterFormActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_encounter_form, menu);
 
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Patient patient =
+                (Patient) getIntent().getSerializableExtra(PatientDetailActivity.FIELD_PATIENT);
+        if(patient != null) {
+            EncounterFormFragment encounterFormFragment =
+                    (EncounterFormFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentEncounterForm);
+            encounterFormFragment.setPatient(patient);
+        }
     }
 
     private void initToolBar() {

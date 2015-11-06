@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lcszulpo.oladoutor.controller.SymptomsFragment"
+    tools:context="com.lcszulpo.oladoutor.controller.VitalSignalsFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="00/00/0000 00:00"
-                android:id="@+id/textViewSymptomsDate"
+                android:id="@+id/textView16"
                 android:textSize="25dp" />
         </LinearLayout>
 
@@ -42,19 +42,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="10">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView3"
-            android:src="@drawable/ic_vomit"
-            android:layout_weight="2"
-            android:layout_margin="5dp" />
+            android:src="@drawable/ic_heart"
+            android:layout_weight="1"
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -63,10 +62,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="VÔMITO"
+                android:text="PULSAÇÃO"
                 android:id="@+id/textView8"
                 android:textStyle="bold"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
 
@@ -74,9 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewVomit"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:id="@+id/textView9"
+                android:textSize="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -85,19 +85,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="10">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView5"
-            android:layout_weight="2"
-            android:src="@drawable/ic_diarrhea"
-            android:layout_margin="5dp" />
+            android:layout_weight="1"
+            android:src="@drawable/ic_lungs"
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -106,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DIARRÉIA"
+                android:text="RESPIRAÇÃO"
                 android:id="@+id/textView10"
                 android:textStyle="bold"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
 
@@ -117,9 +116,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewDiarrhea"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:id="@+id/textView11"
+                android:textSize="35dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -127,19 +127,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="10">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView4"
-            android:layout_weight="2"
-            android:src="@drawable/ic_pain"
-            android:layout_margin="5dp" />
+            android:layout_weight="1"
+            android:src="@drawable/ic_thermometer"
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -148,10 +147,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DOR"
+                android:text="TEMPERATURA"
                 android:id="@+id/textView12"
                 android:textStyle="bold"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
 
@@ -159,9 +158,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewPain"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:id="@+id/textView13"
+                android:textSize="35dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -169,19 +169,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="10">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView2"
-            android:layout_weight="2"
-            android:src="@drawable/ic_bleed"
-            android:layout_margin="5dp" />
+            android:layout_weight="1"
+            android:src="@drawable/ic_body"
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -190,10 +189,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="HEMORRAGIA"
+                android:text="PESO"
                 android:id="@+id/textView14"
                 android:textStyle="bold"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
 
@@ -201,53 +200,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewBleed"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp" >
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView6"
-            android:layout_weight="2"
-            android:src="@drawable/ic_weakness"
-            android:layout_margin="5dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="FRAQUEZA"
-                android:id="@+id/textView17"
-                android:textStyle="bold"
-                android:textSize="30dp"
+                android:id="@+id/textView15"
+                android:textSize="35dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewWeakness"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

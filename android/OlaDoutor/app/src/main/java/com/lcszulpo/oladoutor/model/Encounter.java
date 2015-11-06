@@ -2,12 +2,13 @@ package com.lcszulpo.oladoutor.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by lcszulpo on 12/09/15.
  */
-public class Encounter {
+public class Encounter implements Serializable {
 
     private Integer id;
     private Date date;
@@ -32,6 +33,10 @@ public class Encounter {
     private Diet diet;
     private Hydration hydration;
     private Condition condition;
+
+    private Patient patient;
+
+    private Integer version;
 
     public Integer getId() {
         return id;
@@ -191,6 +196,22 @@ public class Encounter {
 
     public void setCondition(Condition condition) {
         this.condition = condition;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public enum Pain {

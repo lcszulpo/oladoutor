@@ -101,7 +101,7 @@ public class Encounter implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Condition condition;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Patient patient;
 
 	public Integer getId() {
@@ -327,11 +327,11 @@ public class Encounter implements Serializable {
 	}
 
 	public enum PainDetail {
-		HEADACHE, SORE_THROAT, HEARTBURN, CHEST, BACK, MUSCLE_JOINT, ABDOMINAL_UPPER, ABDOMINAL_LOWER
+		NONE, HEADACHE, SORE_THROAT, HEARTBURN, CHEST, BACK, MUSCLE_JOINT, ABDOMINAL_UPPER, ABDOMINAL_LOWER
 	}
 
 	public enum BleedingDetail {
-		ORAL_BLEEDING, NOSEBLEED, VOMITING_BLOOD, VAGINAL_BLEEDING, COUGHING_UP_BLOOD, BLOOD_IN_URINE, BLEEDING_FROM_EYES, BLACK_BLOOD_IN_STOOL, RED_BLOOD_IN_STOOL
+		NONE, ORAL_BLEEDING, NOSEBLEED, VOMITING_BLOOD, VAGINAL_BLEEDING, COUGHING_UP_BLOOD, BLOOD_IN_URINE, BLEEDING_FROM_EYES, BLACK_BLOOD_IN_STOOL, RED_BLOOD_IN_STOOL
 	}
 
 	public enum WeaknessDetail {

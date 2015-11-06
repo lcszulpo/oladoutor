@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
 import com.lcszulpo.oladoutor.model.Encounter;
+import com.lcszulpo.oladoutor.model.Patient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +53,8 @@ public class EncounterFormFragment extends Fragment {
     private Spinner spinnerDiet;
     private Spinner spinnerHydration;
     private Spinner spinnerCondition;
+    private Integer idPatient;
+    private Patient patient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -193,6 +196,7 @@ public class EncounterFormFragment extends Fragment {
         Encounter encounter = new Encounter();
 
         encounter.setDate(new Date());
+        encounter.setPatient(patient);
 
         encounter.setPulseRate(Integer.valueOf(editTextPulseRate.getText().toString()));
         encounter.setRespiratoryRate(Integer.valueOf(editTextRespiratoryRate.getText().toString()));
@@ -231,7 +235,7 @@ public class EncounterFormFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        clear();
+                        getActivity().onBackPressed();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -254,7 +258,6 @@ public class EncounterFormFragment extends Fragment {
 
     private Boolean validateRequiriedFields() {
         Boolean retorno = true;
-
 
         if (editTextPulseRate.getText().toString().isEmpty()) {
             editTextPulseRate.setError("Este campo deve ser informado");
@@ -300,7 +303,24 @@ public class EncounterFormFragment extends Fragment {
             }
         }
 
+        if(patient == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Erro ao salvar o encontro");
+            builder.setMessage("Um paciente deve ser selecionado.");
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    getActivity().finish();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            retorno = false;
+        }
+
         return retorno;
     }
 
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }

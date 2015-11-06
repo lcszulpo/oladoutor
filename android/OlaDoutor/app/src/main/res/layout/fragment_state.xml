@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="00/00/0000 00:00"
-                android:id="@+id/textView16"
+                android:id="@+id/textViewStateDate"
                 android:textSize="25dp" />
         </LinearLayout>
 
@@ -74,8 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DETALHE"
-                android:id="@+id/textView9"
+                android:id="@+id/textViewConsciousness"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -118,8 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DETALHE"
-                android:id="@+id/textView11"
+                android:id="@+id/textViewMobility"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -161,8 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DETALHE"
-                android:id="@+id/textView13"
+                android:id="@+id/textViewDiet"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -204,8 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DETALHE"
-                android:id="@+id/textView15"
+                android:id="@+id/textViewHydration"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>
@@ -248,8 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="DETALHE"
-                android:id="@+id/textView18"
+                android:id="@+id/textViewCondition"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp" />
         </LinearLayout>

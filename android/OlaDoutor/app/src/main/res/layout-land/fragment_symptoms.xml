@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="00/00/0000 00:00"
-                android:id="@+id/textViewSymptomsDate"
+                android:id="@+id/textView16"
                 android:textSize="25dp" />
         </LinearLayout>
 
@@ -42,19 +42,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="9">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView3"
             android:src="@drawable/ic_vomit"
-            android:layout_weight="2"
-            android:layout_margin="5dp" />
+            android:layout_weight="1"
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -74,9 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewVomit"
+                android:id="@+id/textView9"
                 android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -85,19 +85,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="9">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView5"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/ic_diarrhea"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -117,9 +116,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewDiarrhea"
+                android:id="@+id/textView11"
                 android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -127,19 +127,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="9">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView4"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/ic_pain"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10">
@@ -159,9 +158,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewPain"
+                android:id="@+id/textView13"
                 android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -169,22 +169,22 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp">
+        android:layout_weight="9">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView2"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/ic_bleed"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10">
+            android:layout_weight="10"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,9 +201,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewBleed"
+                android:id="@+id/textView15"
                 android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -212,19 +213,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="5dp" >
+        android:layout_weight="9">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView6"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/ic_weakness"
-            android:layout_margin="5dp" />
+            android:layout_margin="10dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="10" >
@@ -244,9 +244,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textViewWeakness"
+                android:id="@+id/textView18"
                 android:textSize="25dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
         </LinearLayout>
     </LinearLayout>
 

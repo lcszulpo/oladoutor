@@ -5,55 +5,66 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lcszulpo.oladoutor.R;
+import com.lcszulpo.oladoutor.model.Encounter;
+
+import java.text.SimpleDateFormat;
 
 public class VitalSignalsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String FIELD_ENCOUNTER = "ENCOUNTER";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment VitalSignalsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static VitalSignalsFragment newInstance(String param1, String param2) {
+    private Encounter encounter;
+
+    private TextView textViewVitalSignalsDate;
+    private TextView textViewPulseRate;
+    private TextView textViewRespiratoryRate;
+    private TextView textViewTemperature;
+    private TextView textViewWeight;
+
+    public static VitalSignalsFragment newInstance(Encounter encounter) {
         VitalSignalsFragment fragment = new VitalSignalsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(FIELD_ENCOUNTER, encounter);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public VitalSignalsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            encounter = (Encounter) getArguments().getSerializable(FIELD_ENCOUNTER);
         }
+
+        findViewsById();
+        initFields();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_vital_signals, container, false);
+    }
+
+    private void findViewsById() {
+        textViewVitalSignalsDate = (TextView) getActivity().findViewById(R.id.textViewVitalSignalsDate);
+        textViewPulseRate = (TextView) getActivity().findViewById(R.id.textViewPulseRate);
+        textViewRespiratoryRate = (TextView) getActivity().findViewById(R.id.textViewRespiratoryRate);
+        textViewTemperature = (TextView) getActivity().findViewById(R.id.textViewTemperature);
+        textViewWeight = (TextView) getActivity().findViewById(R.id.textViewWeight);
+    }
+
+    private void initFields() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        textViewVitalSignalsDate.setText(format.format(encounter.getDate()));
+        textViewPulseRate.setText(encounter.getPulseRate() + " BPM");
+        textViewRespiratoryRate.setText(encounter.getRespiratoryRate() + " MRPM");
+        textViewTemperature.setText(String.valueOf(encounter.getTemperature()).replace(".", ",") + " ºC");
+        textViewWeight.setText(String.valueOf(encounter.getWeight()).replace(".", ",") + " KG");
     }
 
 }
