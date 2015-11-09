@@ -20,14 +20,13 @@ import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MainActivityFragment extends Fragment {
+public class ConnectionFragment extends Fragment {
 
     private static final String FILENAME = "url";
 
@@ -37,7 +36,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_connection, container, false);
     }
 
     @Override
