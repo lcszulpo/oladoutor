@@ -2,7 +2,6 @@ package br.com.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -71,31 +70,6 @@ public class Patient implements Serializable {
 		this.version = version;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof Patient)) {
-			return false;
-		}
-		Patient other = (Patient) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -144,6 +118,14 @@ public class Patient implements Serializable {
 		this.locale = locale;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
 	public enum AgeType {
 		YEARS, MONTHS
 	}
@@ -156,14 +138,31 @@ public class Patient implements Serializable {
 		ACTIVE, INACTIVE
 	}
 
-	public Status getStatus() {
-		return status;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Patient)) {
+			return false;
+		}
+		Patient other = (Patient) obj;
+		if (id != null) {
+			if (!id.equals(other.id)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
-
+	
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";

@@ -67,8 +67,24 @@ public class LocaleEndpoint {
 
 	@GET
 	@Produces("application/json")
+	@Path("/list/actives")
+	public List<Locale> listActives() {
+		TypedQuery<Locale> findAllQuery = em
+				.createQuery(
+						"SELECT DISTINCT l FROM Locale l WHERE l.status = :status ORDER BY l.id",
+						Locale.class);
+		
+		findAllQuery.setParameter("status", Locale.Status.ACTIVE);
+		
+		final List<Locale> results = findAllQuery.getResultList();
+		
+		return results;
+	}
+	
+	@GET
+	@Produces("application/json")
 	@Path("/list")
-	public List<Locale> listAll() {
+	public List<Locale> list() {
 		TypedQuery<Locale> findAllQuery = em
 				.createQuery(
 						"SELECT DISTINCT l FROM Locale l ORDER BY l.id",

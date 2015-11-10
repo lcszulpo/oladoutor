@@ -10,6 +10,7 @@ public class Locale implements Serializable {
     private Integer id;
     private String description;
     private Integer version;
+    private Status status;
 
     public Integer getId() {
         return id;
@@ -35,8 +36,22 @@ public class Locale implements Serializable {
         this.version = version;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return description;
     }
+
+    public enum Status {
+        ACTIVE,
+        INACTIVE;
+    }
+
 }

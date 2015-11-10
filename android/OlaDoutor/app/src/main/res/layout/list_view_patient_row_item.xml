@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <com.github.ivbaranov.mli.MaterialLetterIcon
+        android:id="@+id/materialLetterIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -9,8 +18,8 @@
         android:text="First Name"
         android:id="@+id/txtvName"
         android:textSize="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="24dp" />
+        android:gravity="center_vertical"
+        android:textAlignment="gravity"
+        android:layout_marginLeft="10dp" />
 
 </LinearLayout>

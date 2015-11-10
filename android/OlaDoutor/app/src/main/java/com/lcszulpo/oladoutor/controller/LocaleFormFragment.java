@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,6 +29,7 @@ import org.json.JSONObject;
 public class LocaleFormFragment extends Fragment {
 
     private EditText editTextDescricao;
+    private ToggleButton toggleButtonSituacao;
     private Locale locale;
 
     @Override
@@ -42,6 +44,7 @@ public class LocaleFormFragment extends Fragment {
         setHasOptionsMenu(true);
 
         findViewsById();
+        initFields();
     }
 
     @Override
@@ -137,6 +140,12 @@ public class LocaleFormFragment extends Fragment {
 
         locale.setDescription(editTextDescricao.getText().toString());
 
+        if(toggleButtonSituacao.isChecked()) {
+            locale.setStatus(Locale.Status.ACTIVE);
+        } else {
+            locale.setStatus(Locale.Status.INACTIVE);
+        }
+
         JSONObject jsonObject = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -177,10 +186,16 @@ public class LocaleFormFragment extends Fragment {
 
         editTextDescricao.setText("");
         editTextDescricao.setError(null);
+        toggleButtonSituacao.setChecked(true);
     }
 
     private void findViewsById() {
         editTextDescricao = (EditText) getActivity().findViewById(R.id.editTextDescricao);
+        toggleButtonSituacao = (ToggleButton) getActivity().findViewById(R.id.toggleButtonSituacao);
+    }
+
+    private void initFields() {
+        toggleButtonSituacao.setChecked(true);
     }
 
     private Boolean validateRequiriedFields() {
@@ -196,6 +211,11 @@ public class LocaleFormFragment extends Fragment {
         this.locale = locale;
 
         editTextDescricao.setText(locale.getDescription());
+        if(locale.getStatus().equals(Locale.Status.ACTIVE)) {
+            toggleButtonSituacao.setChecked(true);
+        } else {
+            toggleButtonSituacao.setChecked(false);
+        }
     }
 
 }

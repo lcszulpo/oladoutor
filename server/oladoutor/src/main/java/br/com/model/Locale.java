@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,13 +23,18 @@ public class Locale implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, nullable = false)
 	private Integer id;
+	
 	@Version
 	@Column(name = "version")
 	private int version;
 
 	@Column(length = 70, name = "description", nullable = false)
 	private String description;
-
+	
+	@Column(name = "status", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -42,6 +49,22 @@ public class Locale implements Serializable {
 
 	public void setVersion(final int version) {
 		this.version = version;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
@@ -68,15 +91,7 @@ public class Locale implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
@@ -86,6 +101,11 @@ public class Locale implements Serializable {
 		if (description != null && !description.trim().isEmpty())
 			result += ", description: " + description;
 		return result;
+	}
+	
+	public enum Status {
+		ACTIVE,
+		INACTIVE;
 	}
 
 }

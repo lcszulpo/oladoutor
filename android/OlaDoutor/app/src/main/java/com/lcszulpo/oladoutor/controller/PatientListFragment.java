@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.ivbaranov.mli.MaterialLetterIcon;
 import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
 import com.lcszulpo.oladoutor.model.Patient;
@@ -205,8 +207,15 @@ public class PatientListFragment extends ListFragment {
 
             View view = inflater.inflate(R.layout.list_view_patient_row_item, null);
 
-            TextView txtvName = (TextView)view.findViewById(R.id.txtvName);
+            TextView txtvName = (TextView) view.findViewById(R.id.txtvName);
             txtvName.setText(patient.getName() + " " + patient.getLastName());
+
+            MaterialLetterIcon materialLetterIcon = (MaterialLetterIcon) view.findViewById(R.id.materialLetterIcon);
+            materialLetterIcon.setLetter(patient.getName() + " " + patient.getLastName());
+            materialLetterIcon.setInitials(true);
+            materialLetterIcon.setInitialsNumber(2);
+            materialLetterIcon.setLetterSize(14);
+            materialLetterIcon.setShapeColor(Color.GRAY);
 
             return view;
         }

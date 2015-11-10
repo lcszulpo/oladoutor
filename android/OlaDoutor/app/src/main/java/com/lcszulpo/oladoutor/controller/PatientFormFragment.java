@@ -134,7 +134,7 @@ public class PatientFormFragment extends Fragment {
                         AppController.getInstance().getDominio() +
                         getString(R.string.door) +
                         getString(R.string.path) +
-                        getString(R.string.res_locales_list);
+                        getString(R.string.res_locales_list_actives);
 
         JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
