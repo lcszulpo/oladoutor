@@ -74,6 +74,10 @@ public class PatientListFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_locale:
+                Intent intentLocale = new Intent(getActivity(), LocaleListActivity.class);
+                startActivity(intentLocale);
+                break;
             case R.id.action_new:
                 Intent intentPatient = new Intent(getActivity(), PatientFormActivity.class);
                 startActivity(intentPatient);

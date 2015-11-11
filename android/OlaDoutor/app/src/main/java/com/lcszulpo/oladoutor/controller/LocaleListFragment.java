@@ -45,9 +45,6 @@ public class LocaleListFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_return:
-                getActivity().onBackPressed();
-                break;
             case R.id.action_new:
                 Intent intentLocale = new Intent(getActivity(), LocaleFormActivity.class);
                 startActivity(intentLocale);

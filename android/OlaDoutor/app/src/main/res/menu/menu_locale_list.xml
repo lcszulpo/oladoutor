@@ -2,13 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_return"
-        android:orderInCategory="200"
-        android:title="@string/action_return"
-        android:icon="@drawable/ic_return"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/action_new"
         android:orderInCategory="200"
         android:title="@string/action_new"

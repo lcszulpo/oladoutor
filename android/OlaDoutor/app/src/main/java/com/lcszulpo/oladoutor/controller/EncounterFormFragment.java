@@ -74,7 +74,7 @@ public class EncounterFormFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_return:
+            case android.R.id.home:
                 getActivity().onBackPressed();
                 break;
             case R.id.action_save:

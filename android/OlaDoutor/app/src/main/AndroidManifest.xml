@@ -36,12 +36,14 @@
         <activity
             android:name=".controller.LocaleFormActivity"
             android:label="@string/title_activity_locale"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".controller.LocaleListActivity" >
         </activity>
         <activity
             android:name=".controller.LocaleListActivity"
             android:label="@string/title_locale_list"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".controller.PatientListActivity" >
         </activity>
         <activity
             android:name=".controller.EncounterFormActivity"

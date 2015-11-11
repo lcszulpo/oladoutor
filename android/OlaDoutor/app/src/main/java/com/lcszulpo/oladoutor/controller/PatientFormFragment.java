@@ -74,11 +74,11 @@ public class PatientFormFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                getActivity().onBackPressed();
+                break;
             case R.id.action_save:
                 initSaveRequest();
-                break;
-            case R.id.action_return:
-                getActivity().onBackPressed();
                 break;
             case R.id.action_clear:
                 clear();

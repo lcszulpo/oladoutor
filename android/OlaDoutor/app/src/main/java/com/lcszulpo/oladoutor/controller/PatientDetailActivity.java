@@ -86,9 +86,6 @@ public class PatientDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_return:
-                onBackPressed();
-                break;
             case R.id.action_edit:
                 Intent intentPatient = new Intent(this, PatientFormActivity.class);
                 intentPatient.putExtra(FIELD_PATIENT, patient);
@@ -143,6 +140,9 @@ public class PatientDetailActivity extends AppCompatActivity {
         toolbar.setSubtitleTextColor(Color.WHITE);
         toolbar.setTitle(getString(R.string.title_patient_detail));
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
