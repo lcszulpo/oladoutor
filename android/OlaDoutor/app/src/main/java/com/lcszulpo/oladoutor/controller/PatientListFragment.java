@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class PatientListFragment extends ListFragment {
 
     private List<Patient> patients;
 
+    private Boolean isSearchForAll = false;
+
     public interface Callbacks {
         public void onItemSelected(Patient patient);
     }
@@ -68,7 +71,26 @@ public class PatientListFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
-        initPatientListRequest();
+        initPatientListActivesRequest();
+        addListeners();
+    }
+
+    private void addListeners() {
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+                if (isSearchForAll) {
+                    initPatientListActivesRequest();
+                } else {
+                    initPatientListAllRequest();
+                }
+
+                isSearchForAll = !isSearchForAll;
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -77,10 +99,6 @@ public class PatientListFragment extends ListFragment {
             case R.id.action_locale:
                 Intent intentLocale = new Intent(getActivity(), LocaleListActivity.class);
                 startActivity(intentLocale);
-                break;
-            case R.id.action_new:
-                Intent intentPatient = new Intent(getActivity(), PatientFormActivity.class);
-                startActivity(intentPatient);
                 break;
             default:
                 break;
@@ -122,13 +140,52 @@ public class PatientListFragment extends ListFragment {
         }
     }
 
-    private void initPatientListRequest() {
+    private void initPatientListActivesRequest() {
         final String url =
                 getString(R.string.schema) +
                         AppController.getInstance().getDominio() +
                         getString(R.string.door) +
                         getString(R.string.path) +
                         getString(R.string.res_patients_list_actives);
+
+        JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        try {
+                            patients = Arrays.asList(mapper.readValue(response.toString(), Patient[].class));
+                            setListAdapter(new PatientListAdapter(getActivity(), patients));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Erro ao consultar pacientes");
+                builder.setMessage("Nao foi possivel consultar os pacientes do servidor");
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        getActivity().finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(objectRequest);
+    }
+
+    private void initPatientListAllRequest() {
+        final String url =
+                getString(R.string.schema) +
+                        AppController.getInstance().getDominio() +
+                        getString(R.string.door) +
+                        getString(R.string.path) +
+                        getString(R.string.res_patients_list);
 
         JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -220,6 +277,12 @@ public class PatientListFragment extends ListFragment {
             materialLetterIcon.setInitialsNumber(2);
             materialLetterIcon.setLetterSize(14);
             materialLetterIcon.setShapeColor(Color.GRAY);
+            materialLetterIcon.setShapeType(MaterialLetterIcon.SHAPE_RECT);
+
+            if(patient.getStatus().equals(Patient.Status.INACTIVE)) {
+                txtvName.setTextColor(Color.RED);
+                materialLetterIcon.setShapeColor(Color.RED);
+            }
 
             return view;
         }

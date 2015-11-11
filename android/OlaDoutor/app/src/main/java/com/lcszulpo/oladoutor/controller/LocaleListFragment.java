@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -36,30 +37,8 @@ public class LocaleListFragment extends ListFragment {
     private List<Locale> locales;
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_new:
-                Intent intentLocale = new Intent(getActivity(), LocaleFormActivity.class);
-                startActivity(intentLocale);
-                break;
-            default:
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
-
         initLocaleListRequest();
     }
 
@@ -147,6 +126,10 @@ public class LocaleListFragment extends ListFragment {
 
             TextView txtvName = (TextView)view.findViewById(R.id.txtvDescription);
             txtvName.setText(locale.getDescription());
+
+            if(locale.getStatus().equals(Locale.Status.INACTIVE)) {
+                txtvName.setTextColor(Color.RED);
+            }
 
             return view;
         }

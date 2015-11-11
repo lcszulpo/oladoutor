@@ -2,6 +2,9 @@ package com.lcszulpo.oladoutor.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,6 +33,9 @@ public class LocaleFormFragment extends Fragment {
 
     private EditText editTextDescricao;
     private ToggleButton toggleButtonSituacao;
+    private FloatingActionButton fab;
+    private CoordinatorLayout cordinatorLayout;
+
     private Locale locale;
 
     @Override
@@ -45,6 +51,7 @@ public class LocaleFormFragment extends Fragment {
 
         findViewsById();
         initFields();
+        initListeners();
     }
 
     @Override
@@ -52,9 +59,6 @@ public class LocaleFormFragment extends Fragment {
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().onBackPressed();
-                break;
-            case R.id.action_save:
-                initSaveRequest();
                 break;
             case R.id.action_delete:
                 delete();
@@ -167,7 +171,7 @@ public class LocaleFormFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Erro ao consultar localizações");
-                builder.setMessage("Nao foi possivel salvar o paciente.");
+                builder.setMessage("Nao foi possivel salvar a localização.");
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         getActivity().finish();
@@ -187,11 +191,25 @@ public class LocaleFormFragment extends Fragment {
         editTextDescricao.setText("");
         editTextDescricao.setError(null);
         toggleButtonSituacao.setChecked(true);
+
+        Snackbar.make(cordinatorLayout, "Operação realizada com sucesso.", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
 
     private void findViewsById() {
         editTextDescricao = (EditText) getActivity().findViewById(R.id.editTextDescricao);
         toggleButtonSituacao = (ToggleButton) getActivity().findViewById(R.id.toggleButtonSituacao);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        cordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.cordinatorLayout);
+    }
+
+    private void initListeners() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initSaveRequest();
+            }
+        });
     }
 
     private void initFields() {

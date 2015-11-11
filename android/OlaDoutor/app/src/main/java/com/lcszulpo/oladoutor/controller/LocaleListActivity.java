@@ -1,5 +1,6 @@
 package com.lcszulpo.oladoutor.controller;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import com.lcszulpo.oladoutor.R;
 public class LocaleListActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +23,22 @@ public class LocaleListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_locale_list);
 
         initToolBar();
+        findViewsById();
+        addListeners();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_locale_list, menu);
+    private void addListeners() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentPatient = new Intent(LocaleListActivity.this, LocaleFormActivity.class);
+                startActivity(intentPatient);
+            }
+        });
+    }
 
-        return true;
+    private void findViewsById() {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     private void initToolBar() {

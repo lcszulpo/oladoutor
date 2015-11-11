@@ -4,6 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,6 +54,8 @@ public class PatientFormFragment extends Fragment {
     private Spinner spinnerLocale;
     private Patient patient;
     private ToggleButton toggleButtonSituacao;
+    private FloatingActionButton fab;
+    private CoordinatorLayout cordinatorLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,9 +81,6 @@ public class PatientFormFragment extends Fragment {
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().onBackPressed();
-                break;
-            case R.id.action_save:
-                initSaveRequest();
                 break;
             case R.id.action_clear:
                 clear();
@@ -108,6 +110,13 @@ public class PatientFormFragment extends Fragment {
                 }
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initSaveRequest();
+            }
+        });
     }
 
     private void findViewsById() {
@@ -118,6 +127,8 @@ public class PatientFormFragment extends Fragment {
         switchSex = (Switch) getActivity().findViewById(R.id.switchSex);
         spinnerLocale = (Spinner) getActivity().findViewById(R.id.spinnerLocale);
         toggleButtonSituacao = (ToggleButton) getActivity().findViewById(R.id.toggleButtonSituacao);
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        cordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.cordinatorLayout);
     }
 
     private void initLocaleListRequest() {
@@ -275,6 +286,9 @@ public class PatientFormFragment extends Fragment {
         switchSex.setChecked(false);
         spinnerLocale.setSelection(0);
         toggleButtonSituacao.setChecked(true);
+
+        Snackbar.make(cordinatorLayout, "Operação realizada com sucesso.", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
 
     public void setPatient(Patient patient) {

@@ -2,17 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_save"
-        android:orderInCategory="200"
-        android:title="@string/action_save"
-        android:icon="@drawable/ic_save"
-        app:showAsAction="ifRoom"></item>
-
-    <item
         android:id="@+id/action_clear"
         android:orderInCategory="200"
-        android:title="@string/action_clear"
+        android:title="Limpar"
         android:icon="@drawable/ic_clear"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="never"></item>
 
 </menu>

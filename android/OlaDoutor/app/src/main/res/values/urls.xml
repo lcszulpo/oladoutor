@@ -6,6 +6,7 @@
     <string name="path">/oladoutor/rest</string>
     <string name="res_connection">/connection/test</string>
     <string name="res_patients_list_actives">/patients/list/actives</string>
+    <string name="res_patients_list">/patients/list</string>
     <string name="res_patients_save">/patients/save</string>
     <string name="res_locales_list_actives">/locales/list/actives</string>
     <string name="res_locales_list">/locales/list/</string>

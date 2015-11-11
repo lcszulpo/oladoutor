@@ -93,7 +93,7 @@ public class PatientEndpoint {
 	@Path("/list/actives")
 	public List<Patient> listActives() {
 		TypedQuery<Patient> findAllQuery = em
-				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale WHERE p.status = :status ORDER BY p.id", Patient.class);
+				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale WHERE p.status = :status ORDER BY p.name", Patient.class);
 
 		findAllQuery.setParameter("status", Patient.Status.ACTIVE);
 		
@@ -104,13 +104,11 @@ public class PatientEndpoint {
 	
 	@GET
 	@Produces("application/json")
-	@Path("/list/inactives")
-	public List<Patient> listInactives() {
+	@Path("/list/")
+	public List<Patient> list() {
 		TypedQuery<Patient> findAllQuery = em
-				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale WHERE p.status = :status ORDER BY p.id", Patient.class);
+				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale ORDER BY p.name", Patient.class);
 
-		findAllQuery.setParameter("status", Patient.Status.INACTIVE);
-		
 		final List<Patient> results = findAllQuery.getResultList();
 
 		return results;

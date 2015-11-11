@@ -71,7 +71,7 @@ public class LocaleEndpoint {
 	public List<Locale> listActives() {
 		TypedQuery<Locale> findAllQuery = em
 				.createQuery(
-						"SELECT DISTINCT l FROM Locale l WHERE l.status = :status ORDER BY l.id",
+						"SELECT DISTINCT l FROM Locale l WHERE l.status = :status ORDER BY l.description",
 						Locale.class);
 		
 		findAllQuery.setParameter("status", Locale.Status.ACTIVE);
@@ -87,7 +87,7 @@ public class LocaleEndpoint {
 	public List<Locale> list() {
 		TypedQuery<Locale> findAllQuery = em
 				.createQuery(
-						"SELECT DISTINCT l FROM Locale l ORDER BY l.id",
+						"SELECT DISTINCT l FROM Locale l ORDER BY l.description",
 						Locale.class);
 		
 		final List<Locale> results = findAllQuery.getResultList();
