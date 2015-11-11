@@ -4,22 +4,22 @@
     <item
         android:id="@+id/action_edit"
         android:orderInCategory="200"
-        android:title="@string/action_edit"
+        android:title="Editar paciente"
         android:icon="@drawable/ic_edit"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="never"></item>
 
     <item
         android:id="@+id/action_new"
         android:orderInCategory="200"
         android:title="Novo encontro"
         android:icon="@drawable/ic_new"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_delete"
         android:orderInCategory="200"
-        android:title="Remover"
+        android:title="Remover encontro"
         android:icon="@drawable/ic_delete"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="never"></item>
 
 </menu>

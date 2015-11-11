@@ -39,11 +39,10 @@ import java.io.IOException;
 public class PatientDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
     private Patient patient;
     private Encounter encounter;
     private FrameLayout frameLayout;
+    private FrameLayout frameLayoutFragment;
 
     public static final String FIELD_PATIENT = "PATIENT";
 
@@ -54,8 +53,8 @@ public class PatientDetailActivity extends AppCompatActivity {
 
         initToolBar();
 
-        mPager = (ViewPager) findViewById(R.id.pager);
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        frameLayoutFragment = (FrameLayout) findViewById(R.id.frameLayoutFragment);
 
         patient = (Patient) getIntent().getSerializableExtra(FIELD_PATIENT);
     }
@@ -65,15 +64,6 @@ public class PatientDetailActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_patient_detail, menu);
 
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
     }
 
     @Override
@@ -145,35 +135,6 @@ public class PatientDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-
-        private Encounter encounter;
-
-        public ScreenSlidePagerAdapter(FragmentManager fm, Encounter encounter) {
-            super(fm);
-            this.encounter = encounter;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return VitalSignalsFragment.newInstance(encounter);
-                case 1:
-                    return SymptomsFragment.newInstance(encounter);
-                case 2:
-                    return StateFragment.newInstance(encounter);
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-    }
-
     private void initSearchRequest() {
         final String url =
                 getString(R.string.schema) +
@@ -191,8 +152,11 @@ public class PatientDetailActivity extends AppCompatActivity {
                         try {
                             encounter = mapper.readValue(response.toString(), Encounter.class);
 
-                            mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), encounter);
-                            mPager.setAdapter(mPagerAdapter);
+                            PatientDetailFragment patientDetailFragment = (PatientDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_patient_detail);
+                            patientDetailFragment.fillEncounter(encounter);
+
+                            frameLayoutFragment.setVisibility(View.VISIBLE);
+                            frameLayout.setVisibility(View.GONE);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -212,7 +176,7 @@ public class PatientDetailActivity extends AppCompatActivity {
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 } else {
-                    mPager.setVisibility(View.GONE);
+                    frameLayoutFragment.setVisibility(View.GONE);
                     frameLayout.setVisibility(View.VISIBLE);
                 }
             }

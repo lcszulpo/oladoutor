@@ -8,11 +8,25 @@
         layout="@layout/tool_bar">
     </include>
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
+    <!--<android.support.v4.view.ViewPager-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/pager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+
+    <FrameLayout
+        android:id="@+id/frameLayoutFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/fragment_patient_detail"
+            android:name="com.lcszulpo.oladoutor.controller.PatientDetailFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -31,5 +45,7 @@
             android:gravity="center"
             android:textColor="#c6c6c6" />
     </FrameLayout>
+
+
 
 </LinearLayout>

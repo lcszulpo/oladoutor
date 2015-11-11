@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lcszulpo.oladoutor.R;
 import com.lcszulpo.oladoutor.model.Encounter;
@@ -14,20 +15,78 @@ import com.lcszulpo.oladoutor.model.Encounter;
  */
 public class PatientDetailFragment extends Fragment {
 
-    private static final String FIELD_ENCOUNTER = "ENCOUNTER";
+    private TextView textViewVitalSignalsDate;
+    private TextView textViewPulseRate;
+    private TextView textViewRespiratoryRate;
+    private TextView textViewTemperature;
+    private TextView textViewWeight;
 
-    public static PatientDetailFragment newInstance(Encounter encounter) {
-        PatientDetailFragment fragment = new PatientDetailFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(FIELD_ENCOUNTER, encounter);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextView textViewSymptomsDate;
+    private TextView textViewVomit;
+    private TextView textViewDiarrhea;
+    private TextView textViewPain;
+    private TextView textViewBleed;
+    private TextView textViewWeakness;
+
+    private TextView textViewStateDate;
+    private TextView textViewConsciousness;
+    private TextView textViewMobility;
+    private TextView textViewDiet;
+    private TextView textViewHydration;
+    private TextView textViewCondition;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_patient_detail, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        findViewsById();
+    }
+
+    public void fillEncounter(Encounter encounter) {
+        textViewPulseRate.setText(encounter.getPulseRate() + " BPM");
+        textViewRespiratoryRate.setText(encounter.getRespiratoryRate() + " MRPM");
+        textViewTemperature.setText(String.valueOf(encounter.getTemperature()).replace(".", ",") + " ºC");
+        textViewWeight.setText(String.valueOf(encounter.getWeight()).replace(".", ",") + " KG");
+
+        textViewVomit.setText(String.valueOf(encounter.getVomit()) + " x em 24H");
+        textViewDiarrhea.setText(String.valueOf(encounter.getDiarrhea()) + " x em 24H");
+        textViewPain.setText(encounter.getPain().toString());
+        textViewBleed.setText(encounter.getBleedingDetail().toString());
+        textViewWeakness.setText(encounter.getWeaknessDetail().toString());
+
+        textViewConsciousness.setText(encounter.getConsciousness().toString());
+        textViewMobility.setText(encounter.getMobility().toString());
+        textViewDiet.setText(encounter.getDiet().toString());
+        textViewHydration.setText(encounter.getHydration().toString());
+        textViewCondition.setText(encounter.getCondition().toString());
+    }
+
+    private void findViewsById() {
+        textViewVitalSignalsDate = (TextView) getActivity().findViewById(R.id.textViewVitalSignalsDate);
+        textViewPulseRate = (TextView) getActivity().findViewById(R.id.textViewPulseRate);
+        textViewRespiratoryRate = (TextView) getActivity().findViewById(R.id.textViewRespiratoryRate);
+        textViewTemperature = (TextView) getActivity().findViewById(R.id.textViewTemperature);
+        textViewWeight = (TextView) getActivity().findViewById(R.id.textViewWeight);
+
+        textViewSymptomsDate = (TextView) getActivity().findViewById(R.id.textViewSymptomsDate);
+        textViewVomit = (TextView) getActivity().findViewById(R.id.textViewVomit);
+        textViewDiarrhea = (TextView) getActivity().findViewById(R.id.textViewDiarrhea);
+        textViewPain = (TextView) getActivity().findViewById(R.id.textViewPain);
+        textViewBleed = (TextView) getActivity().findViewById(R.id.textViewBleed);
+        textViewWeakness = (TextView) getActivity().findViewById(R.id.textViewWeakness);
+
+        textViewStateDate = (TextView) getActivity().findViewById(R.id.textViewStateDate);
+        textViewConsciousness = (TextView) getActivity().findViewById(R.id.textViewConsciousness);
+        textViewMobility = (TextView) getActivity().findViewById(R.id.textViewMobility);
+        textViewDiet = (TextView) getActivity().findViewById(R.id.textViewDiet);
+        textViewHydration = (TextView) getActivity().findViewById(R.id.textViewHydration);
+        textViewCondition = (TextView) getActivity().findViewById(R.id.textViewCondition);
     }
 
 }
