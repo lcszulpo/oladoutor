@@ -8,30 +8,37 @@
         layout="@layout/tool_bar">
     </include>
 
-    <!--<android.support.v4.view.ViewPager-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/pager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-
     <FrameLayout
         android:id="@+id/frameLayoutFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-        <fragment
-            android:id="@+id/fragment_patient_detail"
-            android:name="com.lcszulpo.oladoutor.controller.PatientDetailFragment"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/spinnerEncounters"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_patient_detail"
+                android:name="com.lcszulpo.oladoutor.controller.PatientDetailFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10" />
+        </LinearLayout>
 
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/frameLayout">
 
         <TextView

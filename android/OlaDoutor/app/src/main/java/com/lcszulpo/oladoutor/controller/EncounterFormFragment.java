@@ -2,6 +2,9 @@ package com.lcszulpo.oladoutor.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +35,9 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class EncounterFormFragment extends Fragment {
+
+    private FloatingActionButton fab;
+    private CoordinatorLayout cordinatorLayout;
 
     private EditText editTextPulseRate;
     private EditText editTextRespiratoryRate;
@@ -69,6 +75,16 @@ public class EncounterFormFragment extends Fragment {
 
         findViewsById();
         initFields();
+        initListeners();
+    }
+
+    private void initListeners() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initSaveRequest();
+            }
+        });
     }
 
     @Override
@@ -76,9 +92,6 @@ public class EncounterFormFragment extends Fragment {
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().onBackPressed();
-                break;
-            case R.id.action_save:
-                initSaveRequest();
                 break;
             case R.id.action_clear:
                 clear();
@@ -91,6 +104,9 @@ public class EncounterFormFragment extends Fragment {
     }
 
     private void findViewsById() {
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        cordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.cordinatorLayout);
+
         editTextPulseRate = (EditText) getActivity().findViewById(R.id.editTextPulseRate);
         editTextRespiratoryRate = (EditText) getActivity().findViewById(R.id.editTextRespiratoryRate);
         editTextTemperature = (EditText) getActivity().findViewById(R.id.editTextTemperature);
@@ -179,6 +195,9 @@ public class EncounterFormFragment extends Fragment {
         editTextWeight.setError(null);
         editTextVomit.setError(null);
         editTextDiarrhea.setError(null);
+
+        Snackbar.make(cordinatorLayout, "Operação realizada com sucesso.", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
 
     private void initSaveRequest() {

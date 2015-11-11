@@ -1,20 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.lcszulpo.oladoutor.controller.EncounterFormActivity"
-    android:orientation="vertical">
+    android:id="@+id/cordinatorLayout">
 
-    <include android:id="@+id/tool_bar"
-        layout="@layout/tool_bar">
-    </include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <fragment
-        android:name="com.lcszulpo.oladoutor.controller.EncounterFormFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_encounter_form"
-        android:id="@+id/fragmentEncounterForm" />
+        <include android:id="@+id/tool_bar"
+            layout="@layout/tool_bar">
+        </include>
 
-</LinearLayout>
+        <fragment
+            android:name="com.lcszulpo.oladoutor.controller.EncounterFormFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_encounter_form"
+            android:id="@+id/fragmentEncounterForm" />
+
+        </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_save" />
+
+</android.support.design.widget.CoordinatorLayout>
+

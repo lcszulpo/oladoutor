@@ -1,5 +1,7 @@
 package br.com.rest;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -21,6 +23,7 @@ import br.com.model.Encounter;
 @Stateless
 @Path("/encounters")
 public class EncounterEndpoint {
+	
 	@PersistenceContext(unitName = "oladoutor-pu")
 	private EntityManager em;
 
@@ -41,16 +44,15 @@ public class EncounterEndpoint {
 	}
 
 	@DELETE
-	@Path("/delete/last/{patientId:[0-9][0-9]*}")
+	@Path("/delete/{id:[0-9][0-9]*}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response deleteLastByPatientId(@PathParam("patientId") Integer patientId) {
+	public Response delete(@PathParam("id") Integer id) {
 		TypedQuery<Encounter> findByIdQuery = em.
 				createQuery(
-					"SELECT DISTINCT e FROM Encounter e WHERE e.patient.id = :patientId ORDER BY e.date",
-					Encounter.class).
-				setMaxResults(1);
+					"SELECT DISTINCT e FROM Encounter e WHERE e.id = :id",
+					Encounter.class);
 		
-		findByIdQuery.setParameter("patientId", patientId);
+		findByIdQuery.setParameter("id", id);
 		
 		Encounter entity;
 		
@@ -63,37 +65,28 @@ public class EncounterEndpoint {
 		if (entity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
+		
+		Integer patientId = entity.getPatient().getId();
 		
 		em.remove(entity);
 		
 		return Response.ok().entity(String.valueOf(patientId)).build();
 	}
-
+	
 	@GET
-	@Path("/find/last/{patientId:[0-9][0-9]*}")
+	@Path("/list/{patientId:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findLastByPatientId(@PathParam("patientId") Integer patientId) {
-		TypedQuery<Encounter> findByIdQuery = em.
+	public List<Encounter> listByPatientId(@PathParam("patientId") Integer patientId) {
+		TypedQuery<Encounter> findAllQuery = em.
 				createQuery(
-					"SELECT DISTINCT e FROM Encounter e WHERE e.patient.id = :patientId ORDER BY e.date",
-					Encounter.class).
-				setMaxResults(1);
+					"SELECT DISTINCT e FROM Encounter e WHERE e.patient.id = :patientId ORDER BY e.date DESC",
+					Encounter.class);
 		
-		findByIdQuery.setParameter("patientId", patientId);
+		findAllQuery.setParameter("patientId", patientId);
 		
-		Encounter entity;
+		final List<Encounter> results = findAllQuery.getResultList();
 		
-		try {
-			entity = findByIdQuery.getSingleResult();
-		} catch (NoResultException nre) {
-			entity = null;
-		}
-		
-		if (entity == null) {
-			return Response.status(Status.NOT_FOUND).build();
-		}
-		
-		return Response.ok(entity).build();
+		return results;
 	}
 
 }

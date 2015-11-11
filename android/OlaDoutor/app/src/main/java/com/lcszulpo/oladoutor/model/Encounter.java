@@ -3,6 +3,7 @@ package com.lcszulpo.oladoutor.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -212,6 +213,13 @@ public class Encounter implements Serializable {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        return format.format(getDate());
     }
 
     public enum Pain {

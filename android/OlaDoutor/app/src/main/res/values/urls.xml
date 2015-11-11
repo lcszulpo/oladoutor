@@ -13,7 +13,7 @@
     <string name="res_locales_save">/locales/save</string>
     <string name="res_locales_delete">/locales/delete/</string>
     <string name="res_encounters_save">/encounters/save</string>
-    <string name="res_encounters_find">/encounters/find/last/</string>
-    <string name="res_encounters_delete">/encounters/delete/last/</string>
+    <string name="res_encounters_delete">/encounters/delete/</string>
+    <string name="res_encounters_list">/encounters/list/</string>
 
 </resources>

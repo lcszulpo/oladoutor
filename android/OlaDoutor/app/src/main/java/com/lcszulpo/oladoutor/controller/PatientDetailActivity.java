@@ -17,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,16 +38,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class PatientDetailActivity extends AppCompatActivity {
+
+    public static final String FIELD_PATIENT = "PATIENT";
 
     private Toolbar toolbar;
     private Patient patient;
     private Encounter encounter;
     private FrameLayout frameLayout;
     private FrameLayout frameLayoutFragment;
-
-    public static final String FIELD_PATIENT = "PATIENT";
+    private Spinner spinnerEncounters;
+    private List<Encounter> encounters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +59,34 @@ public class PatientDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_detail);
 
         initToolBar();
+        initFields();
+        findViewsById();
+        initListeners();
+    }
 
+    private void initListeners() {
+        spinnerEncounters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                encounter = (Encounter) spinnerEncounters.getSelectedItem();
+                PatientDetailFragment patientDetailFragment = (PatientDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_patient_detail);
+                patientDetailFragment.fillEncounter(encounter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+    }
+
+    private void findViewsById() {
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         frameLayoutFragment = (FrameLayout) findViewById(R.id.frameLayoutFragment);
+        spinnerEncounters = (Spinner) findViewById(R.id.spinnerEncounters);
+    }
 
+    private void initFields() {
         patient = (Patient) getIntent().getSerializableExtra(FIELD_PATIENT);
     }
 
@@ -141,22 +172,27 @@ public class PatientDetailActivity extends AppCompatActivity {
                         AppController.getInstance().getDominio() +
                         getString(R.string.door) +
                         getString(R.string.path) +
-                        getString(R.string.res_encounters_find) +
+                        getString(R.string.res_encounters_list) +
                         patient.getId();
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url,
-                new Response.Listener<JSONObject>() {
+        JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         ObjectMapper mapper = new ObjectMapper();
                         try {
-                            encounter = mapper.readValue(response.toString(), Encounter.class);
+                            encounters = Arrays.asList(mapper.readValue(response.toString(), Encounter[].class));
+                            ArrayAdapter<Encounter> adapter = new ArrayAdapter<Encounter>(PatientDetailActivity.this,
+                                    R.layout.spinner_view_encounter_row_item, encounters);
+                            spinnerEncounters.setAdapter(adapter);
 
-                            PatientDetailFragment patientDetailFragment = (PatientDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_patient_detail);
-                            patientDetailFragment.fillEncounter(encounter);
-
-                            frameLayoutFragment.setVisibility(View.VISIBLE);
-                            frameLayout.setVisibility(View.GONE);
+                            if(encounters != null && !encounters.isEmpty()) {
+                                encounter = encounters.get(0);
+                                PatientDetailFragment patientDetailFragment = (PatientDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_patient_detail);
+                                patientDetailFragment.fillEncounter(encounter);
+                                frameLayoutFragment.setVisibility(View.VISIBLE);
+                                frameLayout.setVisibility(View.GONE);
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -192,7 +228,7 @@ public class PatientDetailActivity extends AppCompatActivity {
                         getString(R.string.door) +
                         getString(R.string.path) +
                         getString(R.string.res_encounters_delete) +
-                        patient.getId();
+                        encounter.getId();
 
         StringRequest objectRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {

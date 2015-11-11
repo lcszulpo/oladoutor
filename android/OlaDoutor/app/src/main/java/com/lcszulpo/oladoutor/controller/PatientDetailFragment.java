@@ -15,20 +15,17 @@ import com.lcszulpo.oladoutor.model.Encounter;
  */
 public class PatientDetailFragment extends Fragment {
 
-    private TextView textViewVitalSignalsDate;
     private TextView textViewPulseRate;
     private TextView textViewRespiratoryRate;
     private TextView textViewTemperature;
     private TextView textViewWeight;
 
-    private TextView textViewSymptomsDate;
     private TextView textViewVomit;
     private TextView textViewDiarrhea;
     private TextView textViewPain;
     private TextView textViewBleed;
     private TextView textViewWeakness;
 
-    private TextView textViewStateDate;
     private TextView textViewConsciousness;
     private TextView textViewMobility;
     private TextView textViewDiet;
@@ -68,20 +65,17 @@ public class PatientDetailFragment extends Fragment {
     }
 
     private void findViewsById() {
-        textViewVitalSignalsDate = (TextView) getActivity().findViewById(R.id.textViewVitalSignalsDate);
         textViewPulseRate = (TextView) getActivity().findViewById(R.id.textViewPulseRate);
         textViewRespiratoryRate = (TextView) getActivity().findViewById(R.id.textViewRespiratoryRate);
         textViewTemperature = (TextView) getActivity().findViewById(R.id.textViewTemperature);
         textViewWeight = (TextView) getActivity().findViewById(R.id.textViewWeight);
 
-        textViewSymptomsDate = (TextView) getActivity().findViewById(R.id.textViewSymptomsDate);
         textViewVomit = (TextView) getActivity().findViewById(R.id.textViewVomit);
         textViewDiarrhea = (TextView) getActivity().findViewById(R.id.textViewDiarrhea);
         textViewPain = (TextView) getActivity().findViewById(R.id.textViewPain);
         textViewBleed = (TextView) getActivity().findViewById(R.id.textViewBleed);
         textViewWeakness = (TextView) getActivity().findViewById(R.id.textViewWeakness);
 
-        textViewStateDate = (TextView) getActivity().findViewById(R.id.textViewStateDate);
         textViewConsciousness = (TextView) getActivity().findViewById(R.id.textViewConsciousness);
         textViewMobility = (TextView) getActivity().findViewById(R.id.textViewMobility);
         textViewDiet = (TextView) getActivity().findViewById(R.id.textViewDiet);
