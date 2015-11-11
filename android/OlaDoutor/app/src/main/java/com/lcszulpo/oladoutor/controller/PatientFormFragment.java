@@ -49,8 +49,8 @@ public class PatientFormFragment extends Fragment {
     private ToggleButton toggleButtonAgeType;
     private Switch switchSex;
     private Spinner spinnerLocale;
-    private ImageButton buttonLocale;
     private Patient patient;
+    private ToggleButton toggleButtonSituacao;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,14 +108,6 @@ public class PatientFormFragment extends Fragment {
                 }
             }
         });
-
-        buttonLocale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentLocale = new Intent(getActivity(), LocaleListActivity.class);
-                startActivity(intentLocale);
-            }
-        });
     }
 
     private void findViewsById() {
@@ -125,7 +117,7 @@ public class PatientFormFragment extends Fragment {
         toggleButtonAgeType = (ToggleButton) getActivity().findViewById(R.id.toggleButtonAgeType);
         switchSex = (Switch) getActivity().findViewById(R.id.switchSex);
         spinnerLocale = (Spinner) getActivity().findViewById(R.id.spinnerLocale);
-        buttonLocale = (ImageButton) getActivity().findViewById(R.id.buttonLocale);
+        toggleButtonSituacao = (ToggleButton) getActivity().findViewById(R.id.toggleButtonSituacao);
     }
 
     private void initLocaleListRequest() {
@@ -154,6 +146,7 @@ public class PatientFormFragment extends Fragment {
                                 toggleButtonAgeType.setChecked(patient.getAgeType() == Patient.AgeType.YEARS ? true : false);
                                 switchSex.setChecked(patient.getSex() == Patient.Sex.F ? true : false);
                                 spinnerLocale.setSelection(getLocale(patient.getLocale()));
+                                toggleButtonSituacao.setChecked(patient.getStatus() == Patient.Status.ACTIVE ? true : false);
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -205,6 +198,11 @@ public class PatientFormFragment extends Fragment {
         }
         patient.setStatus(Patient.Status.ACTIVE);
         patient.setLocale((Locale) spinnerLocale.getSelectedItem());
+        if(toggleButtonSituacao.isChecked()) {
+            patient.setStatus(Patient.Status.ACTIVE);
+        } else {
+            patient.setStatus(Patient.Status.INACTIVE);
+        }
 
         JSONObject jsonObject = null;
         try {
@@ -276,6 +274,7 @@ public class PatientFormFragment extends Fragment {
         toggleButtonAgeType.setChecked(false);
         switchSex.setChecked(false);
         spinnerLocale.setSelection(0);
+        toggleButtonSituacao.setChecked(true);
     }
 
     public void setPatient(Patient patient) {

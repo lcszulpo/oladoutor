@@ -110,32 +110,51 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Localização"
-                android:id="@+id/textViewLocale" />
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <Spinner
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:id="@+id/spinnerLocale"
-                    android:layout_weight="10" />
-
-                <ImageButton
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/buttonLocale"
-                    android:layout_weight="2"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_settings"
-                    android:scaleType="fitCenter" />
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Localização"
+                        android:id="@+id/textViewLocale" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:id="@+id/spinnerLocale" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Situação"
+                        android:id="@+id/textViewSituacao" />
+
+                    <ToggleButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New ToggleButton"
+                        android:id="@+id/toggleButtonSituacao"
+                        android:textOn="Ativo"
+                        android:textOff="Inativo" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

@@ -22,6 +22,7 @@ import br.com.model.Patient;
 @Stateless
 @Path("/patients")
 public class PatientEndpoint {
+	
 	@PersistenceContext(unitName = "oladoutor-pu")
 	private EntityManager em;
 
@@ -95,6 +96,20 @@ public class PatientEndpoint {
 				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale WHERE p.status = :status ORDER BY p.id", Patient.class);
 
 		findAllQuery.setParameter("status", Patient.Status.ACTIVE);
+		
+		final List<Patient> results = findAllQuery.getResultList();
+
+		return results;
+	}
+	
+	@GET
+	@Produces("application/json")
+	@Path("/list/inactives")
+	public List<Patient> listInactives() {
+		TypedQuery<Patient> findAllQuery = em
+				.createQuery("SELECT DISTINCT p FROM Patient p LEFT JOIN FETCH p.locale WHERE p.status = :status ORDER BY p.id", Patient.class);
+
+		findAllQuery.setParameter("status", Patient.Status.INACTIVE);
 		
 		final List<Patient> results = findAllQuery.getResultList();
 
