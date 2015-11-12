@@ -46,7 +46,7 @@ public class PatientDrugEndpoint {
 	}
 
 	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/delete/{id:[0-9][0-9]*}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response deleteById(@PathParam("id") Integer id) {
 		PatientDrug entity = em.find(PatientDrug.class, id);

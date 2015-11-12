@@ -1,45 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Medicamento"
-        android:id="@+id/textViewMedicamento"
-        android:textSize="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="24dp"
-        android:layout_weight="1" />
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:layout_marginLeft="10dp">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Intervalo"
-            android:id="@+id/textViewIntervalo"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Medicamento"
+            android:id="@+id/textViewMedicamento"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Intervalo"
+                android:id="@+id/textViewIntervalo"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Tipo do intervalo"
+                android:id="@+id/textViewTipoIntervalo"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Tipo do intervalo"
-            android:id="@+id/textViewTipoIntervalo"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Horário da última aplicação"
+            android:id="@+id/textViewHorario"
+            android:layout_weight="1"
+            android:gravity="center_vertical" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Horário"
-        android:id="@+id/textViewHorario"
-        android:layout_weight="1" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="110dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplicação"
+            android:id="@+id/buttonAplicacao" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Excluir"
+            android:id="@+id/buttonExcluir" />
+    </LinearLayout>
 
 </LinearLayout>

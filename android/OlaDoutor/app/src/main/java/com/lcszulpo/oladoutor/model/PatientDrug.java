@@ -1,5 +1,7 @@
 package com.lcszulpo.oladoutor.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Date;
 
 public class PatientDrug {
@@ -53,7 +55,24 @@ public class PatientDrug {
 	}
 
 	public enum IntervalType {
-		MINUTES, HOURS;
+		MINUTES("Minutos"),
+		HOURS("Horas");
+
+		private String description;
+
+		private IntervalType(String description) {
+			this.description = description;
+		}
+
+		@Override
+		public String toString() {
+			return description;
+		}
+
+		@JsonValue
+		public String toValue() {
+			return this.name();
+		}
 	}
 
 	public IntervalType getIntervalType() {

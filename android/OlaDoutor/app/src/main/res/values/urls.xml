@@ -21,5 +21,6 @@
     <string name="res_drugs_save">/drugs/save/</string>
     <string name="res_patient_drugs_save">/patientdrugs/save/</string>
     <string name="res_patient_drugs_list">/patientdrugs/list/</string>
+    <string name="res_patient_drugs_delete">/patientdrugs/delete/</string>
 
 </resources>
