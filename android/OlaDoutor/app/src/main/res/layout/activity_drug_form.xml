@@ -1,0 +1,32 @@
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lcszulpo.oladoutor.controller.DrugFormActivity"
+    android:orientation="vertical"
+    android:id="@+id/cordinatorLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include android:id="@+id/tool_bar"
+            layout="@layout/tool_bar">
+        </include>
+
+        <fragment android:id="@+id/fragment_drug_form"
+            android:name="com.lcszulpo.oladoutor.controller.DrugFormFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_save" />
+
+</android.support.design.widget.CoordinatorLayout>

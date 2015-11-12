@@ -33,6 +33,7 @@ import com.lcszulpo.oladoutor.AppController;
 import com.lcszulpo.oladoutor.R;
 import com.lcszulpo.oladoutor.model.Encounter;
 import com.lcszulpo.oladoutor.model.Patient;
+import com.lcszulpo.oladoutor.model.PatientDrug;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -147,6 +148,16 @@ public class PatientDetailActivity extends AppCompatActivity {
                 }
 
                 initDeleteRequest();
+                break;
+            case R.id.action_drug:
+                Intent intentDrug = new Intent(this, AddDrugActivity.class);
+                intentDrug.putExtra(FIELD_PATIENT, patient);
+                startActivity(intentDrug);
+                break;
+            case R.id.action_view_drugs:
+                Intent intentPatientDrug = new Intent(this, PatientDrugListActivity.class);
+                intentPatientDrug.putExtra(FIELD_PATIENT, patient);
+                startActivity(intentPatientDrug);
                 break;
             default:
                 break;

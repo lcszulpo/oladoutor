@@ -15,5 +15,11 @@
     <string name="res_encounters_save">/encounters/save</string>
     <string name="res_encounters_delete">/encounters/delete/</string>
     <string name="res_encounters_list">/encounters/list/</string>
+    <string name="res_drugs_list">/drugs/list/</string>
+    <string name="res_drugs_list_actives">/drugs/list/actives/</string>
+    <string name="res_drugs_delete">/drugs/delete/</string>
+    <string name="res_drugs_save">/drugs/save/</string>
+    <string name="res_patient_drugs_save">/patientdrugs/save/</string>
+    <string name="res_patient_drugs_list">/patientdrugs/list/</string>
 
 </resources>

@@ -100,6 +100,10 @@ public class PatientListFragment extends ListFragment {
                 Intent intentLocale = new Intent(getActivity(), LocaleListActivity.class);
                 startActivity(intentLocale);
                 break;
+            case R.id.action_drug:
+                Intent intentDrug = new Intent(getActivity(), DrugListActivity.class);
+                startActivity(intentDrug);
+                break;
             default:
                 break;
         }

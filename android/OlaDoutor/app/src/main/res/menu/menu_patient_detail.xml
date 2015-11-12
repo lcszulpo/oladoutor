@@ -22,4 +22,18 @@
         android:icon="@drawable/ic_delete"
         app:showAsAction="never"></item>
 
+    <item
+        android:id="@+id/action_drug"
+        android:orderInCategory="200"
+        android:title="Adicionar medicamento"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="never"></item>
+
+    <item
+        android:id="@+id/action_view_drugs"
+        android:orderInCategory="200"
+        android:title="Ver medicamentos"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="never"></item>
+
 </menu>

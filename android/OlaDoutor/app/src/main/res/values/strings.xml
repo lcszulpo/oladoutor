@@ -53,5 +53,9 @@
     <string name="title_activity_locale">LocaleActivity</string>
 
     <string name="title_activity_encounter_form">EncounterFormActivity</string>
+    <string name="title_activity_drug_list">DrugListActivity</string>
+    <string name="title_activity_drug_form">DrugFormActivity</string>
+    <string name="title_activity_add_drug">AddDrugActivity</string>
+    <string name="title_activity_patient_drug_list">Medicamentos</string>
 
 </resources>

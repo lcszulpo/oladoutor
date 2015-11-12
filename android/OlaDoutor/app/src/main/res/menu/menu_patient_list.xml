@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
+    <item android:id="@+id/action_drug"
+        android:title="Medicamentos"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
 </menu>

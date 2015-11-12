@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Medicamento"
+        android:id="@+id/textViewMedicamento"
+        android:textSize="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Intervalo"
+            android:id="@+id/textViewIntervalo"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Tipo do intervalo"
+            android:id="@+id/textViewTipoIntervalo"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Horário"
+        android:id="@+id/textViewHorario"
+        android:layout_weight="1" />
+
+</LinearLayout>
